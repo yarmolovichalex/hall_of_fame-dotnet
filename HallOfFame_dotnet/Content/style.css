@@ -23,7 +23,7 @@ p {
 	margin: auto;
 	text-align: center;
 }
-img {
+img.small {
 	height: 250px;
 	width: 250px;
 	padding: 10px 0px;
