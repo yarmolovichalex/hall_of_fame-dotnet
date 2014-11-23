@@ -29,7 +29,7 @@ img {
 	padding: 10px 0px;
 }
 .album {
-	display: inline-block;
+	display: none;
 	text-align: left;
 	padding: 15px 20px;
 	margin: 10px;

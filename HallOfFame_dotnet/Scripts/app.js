@@ -1,8 +1,7 @@
 var main = function() {
     "use strict";
 
-    $(".album").hide();
-    $(".album").fadeIn();
+    $(".album").fadeIn().css("display", "inline-block");
 
 	setFancyBox();
 };
