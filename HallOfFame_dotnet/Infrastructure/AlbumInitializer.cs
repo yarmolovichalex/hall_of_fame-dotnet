@@ -12,6 +12,7 @@ namespace HallOfFame_dotnet.Infrastructure
             {
                 new Album
                 {
+                    ID = 1,
                     Artist = "Metallica",
                     Name = "Master Of Puppets",
                     Year = 1986,
@@ -19,6 +20,7 @@ namespace HallOfFame_dotnet.Infrastructure
                 },
                 new Album
                 {
+                    ID = 2,
                     Artist = "Slayer",
                     Name = "Reign In Blood",
                     Year = 1986,
@@ -26,6 +28,7 @@ namespace HallOfFame_dotnet.Infrastructure
                 },
                 new Album
                 {
+                    ID = 3,
                     Artist = "Totalselfhatred",
                     Name = "Totalselfhatred",
                     Year = 2008,
@@ -33,6 +36,7 @@ namespace HallOfFame_dotnet.Infrastructure
                 },
                 new Album
                 {
+                    ID = 4,
                     Artist = "Radiohead",
                     Name = "In Rainbows",
                     Year = 2007,
@@ -40,6 +44,7 @@ namespace HallOfFame_dotnet.Infrastructure
                 },
                 new Album
                 {
+                    ID =5,
                     Artist = "Jon Hopkins",
                     Name = "Insides",
                     Year = 2008,
@@ -47,6 +52,7 @@ namespace HallOfFame_dotnet.Infrastructure
                 },
                 new Album
                 {
+                    ID = 6,
                     Artist = "Rob Dougan",
                     Name = "Furious Angels",
                     Year = 2001,
