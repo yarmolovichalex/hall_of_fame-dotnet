@@ -4,15 +4,14 @@ using HallOfFame_dotnet.Infrastructure;
 
 namespace HallOfFame_dotnet.Controllers
 {
-    public class HomeController : Controller
+    public class AlbumController : Controller
     {
         private readonly AlbumContext context = new AlbumContext();
 
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
-            var albums = context.Albums.ToList();
-
-            return View(albums);
+            var album = context.Albums.First(a => a.ID == id);
+            return View(album);
         }
 	}
 }
