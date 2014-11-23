@@ -12,7 +12,7 @@ namespace HallOfFame_dotnet.Controllers
         {
             var albums = context.Albums.ToList();
 
-            return View();
+            return View(albums);
         }
 	}
 }

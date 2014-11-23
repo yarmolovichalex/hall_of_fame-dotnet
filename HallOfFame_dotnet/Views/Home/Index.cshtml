@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<HallOfFame_dotnet.Models.Album>
+@{
     Layout = null;
 }
 
@@ -26,7 +27,15 @@
     </header>
     <main>
         <div class="main">
-
+            @foreach (var album in Model)
+            {
+                <div class="album">
+                    <p>Artist: @album.Artist</p>
+                    <p>Album name: @album.Name</p>
+                    <p>Year: @album.Year</p>
+                    <a class="fancyBox" rel="group" href="@album.Image"><img src="@album.Image"/></a>
+                </div>
+            }
         </div>
     </main>
     <footer></footer>
