@@ -34,7 +34,7 @@
                     <p>Album name: @album.Name</p>
                     <p>Year: @album.Year</p>
                     <a class="fancyBox" rel="group" href="@album.Image"><img src="@album.Image"/></a>
-                    <input type="button" value="Create" onclick="location.href='@Url.Action("Index", "Album", new { id = album.ID })'" />
+                    <input type="button" value="Подробнее" onclick="location.href='@Url.Action("Index", "Album", new { id = album.ID })'" />
                 </div>
             }
         </div>
