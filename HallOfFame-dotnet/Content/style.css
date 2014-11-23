@@ -1,0 +1,38 @@
+body {
+	background-color: #F5F8FA;
+	color: #1F1F1F;
+}
+h1 {
+	font-family: 'Lobster', sans-serif;
+	text-align: center;
+	font-size: 2.5em;
+	padding: 10px;
+}
+h2 {
+	font-family: 'Cuprum', sans-serif;
+	text-align: center;
+	font-size: 1.5em;
+	padding: 10px;
+}
+p {
+	font-family: 'Cuprum', sans-serif;
+	padding: 3px 0px;
+}
+.main {
+	max-width: 945px;
+	margin: auto;
+	text-align: center;
+}
+img {
+	height: 250px;
+	width: 250px;
+	padding: 10px 0px;
+}
+.album {
+	display: inline-block;
+	text-align: left;
+	padding: 15px 20px;
+	margin: 10px;
+	border: 1px solid #BFBFBF;
+	border-radius: 5px;
+}
