@@ -1,21 +1,8 @@
 ﻿@model HallOfFame_dotnet.Models.Album
-@{
-    Layout = null;
-}
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <div class="album">
-        <p>Artist: @Model.Artist</p>
-        <p>Album name: @Model.Name</p>
-        <p>Year: @Model.Year</p>
-        <img src="@Model.Image" />
-    </div>
-</body>
-</html>
+<div class="album">
+    <p>Artist: @Model.Artist</p>
+    <p>Album name: @Model.Name</p>
+    <p>Year: @Model.Year</p>
+    <img src="@Model.Image" />
+</div>
