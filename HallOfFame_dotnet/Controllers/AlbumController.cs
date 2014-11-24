@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Configuration;
 using System.Web.Mvc;
+using System.Xml.Linq;
 using HallOfFame_dotnet.Infrastructure;
 using HallOfFame_dotnet.Utils;
 
@@ -23,12 +24,11 @@ namespace HallOfFame_dotnet.Controllers
                 .AddQuery("album", album.Name)
                 .AddQuery("api_key", WebConfigurationManager.AppSettings["lastfmKey"]);
 
-            HttpClient client = new HttpClient();
-            var response = await client.GetAsync(uri);
+            var response = await new HttpClient().GetAsync(uri);
 
             string resp = await response.Content.ReadAsStringAsync();
 
-           
+            XDocument doc = XDocument.Parse(resp);
             
             return View(album);
         }
