@@ -50,8 +50,17 @@ namespace HallOfFame_dotnet.Controllers
 
             album = ParseResponse(response, album);
 
-            context.Albums.Add(album);
-            context.SaveChanges(); // TODO problem
+            try
+            {
+                context.Albums.Add(album);
+                context.SaveChanges(); // TODO problem
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            
 
             return View("Index", album);
         }
@@ -75,7 +84,7 @@ namespace HallOfFame_dotnet.Controllers
                 {
                     Number = int.Parse(track.Attribute("rank").Value),
                     Name = track.Element("name").Value,
-                    Duration = TimeSpan.FromSeconds(double.Parse(track.Element("duration").Value))
+                    Duration = int.Parse(track.Element("duration").Value)
                 });
             }
 
