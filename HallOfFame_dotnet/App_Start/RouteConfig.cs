@@ -10,16 +10,10 @@ namespace HallOfFame_dotnet
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "Album",
-                url: "{controller}/{id}",
-                defaults: new { controller = "Album", action = "Index" }
-            );
-
-            routes.MapRoute(
-                name: "Home",
-                url: "{controller}",
-                defaults: new { controller = "Home", action = "Index" }
-            );
+               name: "Default",
+               url: "{controller}/{action}/{id}",
+               defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+               );
         }
     }
 }

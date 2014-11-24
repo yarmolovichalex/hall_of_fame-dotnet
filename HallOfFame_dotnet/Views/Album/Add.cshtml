@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "Add album";
+}
+
+@using (Html.BeginForm("Add", "Album", FormMethod.Post)) {
+    <p>Artist:</p>@Html.TextBox("artist")
+    <p>Album name:</p>@Html.TextBox("albumName")
+    <p>Year:</p>@Html.TextBox("year")
+    <input type="submit" value="Add album"/>
+}
+
