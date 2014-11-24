@@ -19,6 +19,7 @@ namespace HallOfFame_dotnet.Controllers
         public ActionResult Index(int id)
         {
             var album = context.Albums.First(a => a.ID == id);
+            album.Tracklist = context.Tracks.Where(t => t.AlbumID == id).ToList();
 
             return View(album);
         }
@@ -50,17 +51,10 @@ namespace HallOfFame_dotnet.Controllers
 
             album = ParseResponse(response, album);
 
-            try
-            {
-                context.Albums.Add(album);
-                context.SaveChanges(); // TODO problem
-            }
-            catch (Exception)
-            {
-                
-                throw;
-            }
-            
+            // TODO errors handling
+
+            context.Albums.Add(album);
+            context.SaveChanges(); 
 
             return View("Index", album);
         }

@@ -6,5 +6,6 @@ namespace HallOfFame_dotnet.Infrastructure
     public class AlbumContext : DbContext
     {
         public DbSet<Album> Albums { get; set; }
+        public DbSet<Track> Tracks { get; set; }
     }
 }

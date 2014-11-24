@@ -14,7 +14,7 @@ h2 {
 	font-size: 1.5em;
 	padding: 10px;
 }
-p {
+p, li {
 	font-family: 'Cuprum', sans-serif;
 	padding: 3px 0px;
 }
@@ -39,3 +39,16 @@ img.small {
 input {
     display: block;
 }
+.separate-album {
+    max-width: 900px;
+	margin: auto;
+}
+.album-big {
+    display: inline;
+    float: left;
+}
+.tracklist {
+    display: inline;
+    float: right;
+}
+
