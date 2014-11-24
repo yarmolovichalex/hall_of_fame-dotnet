@@ -116,6 +116,7 @@
     <Compile Include="Infrastructure\AlbumInitializer.cs" />
     <Compile Include="Models\Album.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\HttpUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
