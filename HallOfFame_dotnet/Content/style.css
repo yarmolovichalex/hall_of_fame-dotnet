@@ -39,17 +39,32 @@ img.small {
 input {
     display: block;
 }
-.separate-album {
-    max-width: 900px;
+
+.album-page {
+    max-width: 984px;
 	margin: auto;
+    text-align: center;
 }
-.album-big {
+.album-page-center {
+    display: inline-block;
+}
+.album-image-big {
+    padding: 10px;
+    margin: 10px;
     display: inline;
     float: left;
+    border: 1px solid #BFBFBF;
+	border-radius: 5px;
 }
-.tracklist {
+.info {
+    width: 300px;
+    text-align: left;
     display: inline;
-    float: right;
+    float: left;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #BFBFBF;
+	border-radius: 5px;
 }
 a#home {
     text-decoration: none;
@@ -58,5 +73,8 @@ a#home {
 a#home:hover {
     text-decoration: none;
     color: #B73045;
+}
+ol {
+    list-style: decimal inside none;
 }
 
