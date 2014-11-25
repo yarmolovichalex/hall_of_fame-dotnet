@@ -58,6 +58,7 @@ namespace HallOfFame_dotnet.Controllers
             string artist = (string) doc.Root.Element("album").Element("artist");
             string albumName = (string)doc.Root.Element("album").Element("name");
 
+            // TODO выбирать картинки не больше 600 x 600 px
             var imageElement = doc.Root.Descendants("image")
                     .FirstOrDefault(e => e.Attribute("size") != null && e.Attribute("size").Value == "mega");
             string image = imageElement != null ? (string) imageElement : null;
