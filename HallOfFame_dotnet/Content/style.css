@@ -51,4 +51,12 @@ input {
     display: inline;
     float: right;
 }
+a#home {
+    text-decoration: none;
+    color: #1F1F1F;
+}
+a#home:hover {
+    text-decoration: none;
+    color: #B73045;
+}
 
