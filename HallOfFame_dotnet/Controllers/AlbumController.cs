@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Configuration;
 using System.Web.Mvc;
+using System.Web.Routing;
 using System.Xml.Linq;
 using HallOfFame_dotnet.Infrastructure;
 using HallOfFame_dotnet.Models;
@@ -33,14 +34,6 @@ namespace HallOfFame_dotnet.Controllers
         [HttpPost]
         public async Task<ActionResult> Add(string artist, string albumName, int year)
         {
-            Album album = new Album()
-            {
-                Artist = artist,
-                Name = albumName,
-                Year = year,
-                Tracklist = new List<Track>()
-            };
-
             var uri = new Uri(WebConfigurationManager.AppSettings["lastfmApi"])
                     .AddQuery("method", "album.getInfo")
                     .AddQuery("artist", artist)
@@ -49,40 +42,53 @@ namespace HallOfFame_dotnet.Controllers
 
             var response = await new HttpClient().GetAsync(uri).Result.Content.ReadAsStringAsync();
 
-            album = ParseResponse(response, album);
+            // придется передавать год, чтобы создать альбом полностью
+            Album album = ParseResponse(response, year);
 
             // TODO errors handling
 
             context.Albums.Add(album);
-            context.SaveChanges(); 
+            context.SaveChanges();
 
-            return View("Index", album);
+            return RedirectToAction("Index", new {id = album.ID});
         }
 
-        private Album ParseResponse(string response, Album album)
+        private Album ParseResponse(string response, int year)
         {
             XDocument doc = XDocument.Parse(response);
 
-            var image = doc.Root.Descendants("image")
+            string artist = (string) doc.Root.Element("album").Element("artist");
+            string albumName = (string)doc.Root.Element("album").Element("name");
+
+            var imageElement = doc.Root.Descendants("image")
                     .FirstOrDefault(e => e.Attribute("size") != null && e.Attribute("size").Value == "mega");
-            if (image != null)
-                album.Image = image.Value;
+            string image = imageElement != null ? (string) imageElement : null;
 
-            var description = doc.Root.Element("album").Element("wiki").Element("summary").Value;
-            album.Description = description;
+            var descElement = doc.Root.Element("album").Element("wiki");
+            string description = descElement != null ? (string) descElement.Element("summary") : null;
 
-            XElement tracks = doc.Root.Element("album").Element("tracks");
-            foreach (var track in tracks.Elements())
+            XElement tracksElement = doc.Root.Element("album").Element("tracks");
+            List<Track> tracks = tracksElement.Elements().Select(track => new Track
             {
-                album.Tracklist.Add(new Track
-                {
-                    Number = int.Parse(track.Attribute("rank").Value),
-                    Name = track.Element("name").Value,
-                    Duration = int.Parse(track.Element("duration").Value)
-                });
-            }
+                Number = int.Parse(track.Attribute("rank").Value), 
+                Name = track.Element("name").Value, 
+                Duration = int.Parse(track.Element("duration").Value)
+            }).ToList();
 
-            return album;
+            return CreateAlbum(artist, albumName, image, year, tracks, description);
+        }
+
+        private Album CreateAlbum(string artist, string name, string image, int year, List<Track> tracks, string description)
+        {
+            return new Album()
+            {
+                Artist = artist,
+                Name = name,
+                Image = image,
+                Year = year,
+                Tracklist = tracks,
+                Description = description,
+            };
         }
     }
 }
