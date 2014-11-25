@@ -10,7 +10,7 @@ namespace HallOfFame_dotnet.Models
         public string Artist { get; set; }
         public int Year { get; set; }
         public string Image { get; set; }
-        public List<Track> Tracklist { get; set; }
+        public virtual ICollection<Track> Tracklist { get; set; }
         //public List<string> Tags { get; set; } 
         public string Description { get; set; }
     }
@@ -22,5 +22,7 @@ namespace HallOfFame_dotnet.Models
         public string Name { get; set; }
         public int Duration { get; set; }
         public int AlbumID { get; set; }
+
+        public virtual Album album { get; set; }
     }
 }

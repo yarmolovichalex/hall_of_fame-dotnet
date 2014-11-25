@@ -5,7 +5,6 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Configuration;
 using System.Web.Mvc;
-using System.Web.Routing;
 using System.Xml.Linq;
 using HallOfFame_dotnet.Infrastructure;
 using HallOfFame_dotnet.Models;
@@ -20,7 +19,6 @@ namespace HallOfFame_dotnet.Controllers
         public ActionResult Index(int id)
         {
             var album = context.Albums.First(a => a.ID == id);
-            album.Tracklist = context.Tracks.Where(t => t.AlbumID == id).ToList();
 
             return View(album);
         }
