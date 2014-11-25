@@ -18,7 +18,7 @@ namespace HallOfFame_dotnet.Controllers
 
         public ActionResult Index(int id)
         {
-            var album = context.Albums.First(a => a.ID == id);
+            var album = context.Albums.FirstOrDefault(a => a.ID == id);
 
             return View(album);
         }
