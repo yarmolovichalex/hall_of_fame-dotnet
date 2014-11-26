@@ -24,39 +24,50 @@ namespace HallOfFame_dotnet.Controllers
         }
 
         [HttpGet]
-        public ActionResult Add()
+        public ActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<ActionResult> Add(string artist, string albumName, int year)
+        public async Task<ActionResult> Create(string artistInput, string albumNameInput)
         {
             var uri = new Uri(WebConfigurationManager.AppSettings["lastfmApi"])
                     .AddQuery("method", "album.getInfo")
-                    .AddQuery("artist", artist)
-                    .AddQuery("album", albumName)
+                    .AddQuery("artist", artistInput)
+                    .AddQuery("album", albumNameInput)
                     .AddQuery("api_key", WebConfigurationManager.AppSettings["lastfmKey"]);
 
             var response = await new HttpClient().GetAsync(uri).Result.Content.ReadAsStringAsync();
 
-            // придется передавать год, чтобы создать альбом полностью
-            Album album = ParseResponse(response, year);
+            Album album = ParseResponse(response);
 
             // TODO errors handling
 
+            return View(album);
+        }
+
+        [HttpPost]
+        public ActionResult Add(Album album)
+        {
             context.Albums.Add(album);
             context.SaveChanges();
 
-            return RedirectToAction("Index", new {id = album.ID});
+            return RedirectToAction("Index", new { id = album.ID });
         }
 
-        private Album ParseResponse(string response, int year)
+        private Album ParseResponse(string response)
         {
             XDocument doc = XDocument.Parse(response);
 
             string artist = (string) doc.Root.Element("album").Element("artist");
             string albumName = (string)doc.Root.Element("album").Element("name");
+
+            int? year = null;
+            DateTime releaseDate;
+            DateTime.TryParse((string) doc.Root.Element("album").Element("releasedate"), out releaseDate);
+            if (releaseDate != DateTime.MinValue)
+                year = releaseDate.Year;
 
             // TODO выбирать картинки не больше 600 x 600 px
             var imageElement = doc.Root.Descendants("image")
@@ -77,7 +88,7 @@ namespace HallOfFame_dotnet.Controllers
             return CreateAlbum(artist, albumName, image, year, tracks, description);
         }
 
-        private Album CreateAlbum(string artist, string name, string image, int year, List<Track> tracks, string description)
+        private Album CreateAlbum(string artist, string name, string image, int? year, List<Track> tracks, string description)
         {
             return new Album()
             {

@@ -1,0 +1,46 @@
+﻿@using HallOfFame_dotnet.Models
+@model Album
+@{
+    ViewBag.Title = "Add album";
+}
+
+@if (Model == null)
+{ 
+    using (Html.BeginForm("Create", "Album", FormMethod.Post))
+    {
+        <p>Artist:</p>@Html.TextBox("artistInput")
+        <p>Album name:</p>@Html.TextBox("albumNameInput")
+        <input type="submit" value="Create album" />
+    }
+}
+else
+{
+    <p>Check album information:</p>
+    using (Html.BeginForm("Add", "Album", FormMethod.Post))
+    {
+        // TODO модель после проверки передается в экшен Add не полностью
+        
+        // поля для исполнителя и названия альбома придется назвать иначе, чтобы брать инфу с lastm 
+        @*<p>Artist:</p>@Html.TextBox("artistChecked", Model.Artist)
+        <p>Album name:</p>@Html.TextBox("albumNameChecked", Model.Name)
+        <p>Year:</p>@Html.TextBox("year", Model.Year)
+        <p>Description:</p>@Html.TextArea("description", Model.Description, 15, 55, null)
+        <p>Image:</p><img src="@Model.Image"/>*@
+    
+        <p>Artist:</p>@Html.EditorFor(a => a.Artist)
+        <p>Album name:</p>@Html.EditorFor(a => a.Name)
+        <p>Year:</p>@Html.EditorFor(a => a.Year)
+        <p>Description:</p>@Html.TextAreaFor(a => a.Description, 15, 55, null)
+
+        foreach (Track track in Model.Tracklist)
+        {
+            @Html.EditorFor(t => t, track.Name, track.Name)
+        }    
+    
+        <p>Image:</p>@Html.EditorFor(a => a.Image)
+        <img src="@Model.Image"/>
+        
+        <input type="submit" value="Add album" />
+    }
+}
+

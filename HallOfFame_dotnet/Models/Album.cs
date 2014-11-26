@@ -7,7 +7,7 @@ namespace HallOfFame_dotnet.Models
         public int ID { get; set; }
         public string Name { get; set; }
         public string Artist { get; set; }
-        public int Year { get; set; }
+        public int? Year { get; set; }
         public string Image { get; set; }
         public virtual ICollection<Track> Tracklist { get; set; }
         //public List<string> Tags { get; set; } 
