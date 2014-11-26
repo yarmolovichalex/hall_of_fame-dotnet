@@ -87,9 +87,11 @@
   <ItemGroup>
     <Content Include="Content\fancybox_overlay.png" />
     <Content Include="Content\fancybox_sprite.png" />
+    <Content Include="Content\gray_jean.png" />
     <Content Include="Content\jquery.fancybox.css" />
     <Content Include="Content\reset.css" />
     <Content Include="Content\style.css" />
+    <Content Include="Content\subtle_grunge.png" />
     <Content Include="Global.asax" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\app.js" />
