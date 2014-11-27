@@ -1,20 +1,19 @@
 ﻿@model HallOfFame_dotnet.Models.Track
 
-
 <tr>
     <td>
         <div class="editor-field">
-            @Html.EditorFor(t => t.Number)
+            @Html.TextBoxFor(t => t.Number, new { @class = "form-control" })
         </div>
     </td>
     <td>
         <div class="editor-field">
-            @Html.EditorFor(t => t.Name)
+            @Html.TextBoxFor(t => t.Name, new { @class = "form-control" })
         </div>
     </td>
     <td>
         <div class="editor-field">
-            @Html.EditorFor(t => t.Duration)
+            @Html.TextBoxFor(t => t.Duration, new { @class = "form-control" })
         </div>
     </td>
 </tr>

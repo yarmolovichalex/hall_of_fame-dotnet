@@ -1,58 +1,47 @@
 ﻿@model HallOfFame_dotnet.Models.Album
 
-<div class="editor-label">
+<div class="form-group">
     @Html.LabelFor(a => a.Artist)
-</div>
-<div class="editor-field">
-    @Html.EditorFor(a => a.Artist)
+    @Html.TextBoxFor(a => a.Artist, new { @class = "form-control" })
 </div>
 
-<div class="editor-label">
+<div class="form-group">
     @Html.LabelFor(a => a.Name)
-</div>
-<div class="editor-field">
-    @Html.TextBoxFor(a => a.Name)
+    @Html.TextBoxFor(a => a.Name, new { @class = "form-control" })
 </div>
 
-<div class="editor-label">
+<div class="form-group">
     @Html.LabelFor(a => a.Year)
-</div>
-<div class="editor-field">
-    @Html.EditorFor(a => a.Year)
+    @Html.TextBoxFor(a => a.Year, new { @class = "form-control" })
 </div>
 
-<div class="editor-label">
+<div class="form-group">
     @Html.LabelFor(a => a.Description)
-</div>
-<div class="editor-field">
-    @Html.TextAreaFor(a => a.Description, 15, 55, null)
+    @Html.TextAreaFor(a => a.Description, 15, 55, new { @class = "form-control" })
 </div>
 
-<div class="editor-label">
+<div class="form-group">
     @Html.LabelFor(a => a.Tracklist)
-</div>
-<div id="tracklist">
-    <table>
-        <tr>
-            <th>
-                <label>Number</label>
-            </th>
-            <th>
-                <label>Name</label>
-            </th>
-            <th>
-                <label>Duration</label>
-            </th>
-        </tr>
-        @Html.EditorFor(a => a.Tracklist)
-    </table>
+    <div id="tracklist">
+        <table>
+            <tr>
+                <th>
+                    <label>Number</label>
+                </th>
+                <th>
+                    <label>Name</label>
+                </th>
+                <th>
+                    <label>Duration</label>
+                </th>
+            </tr>
+            @Html.EditorFor(a => a.Tracklist)
+        </table>
+    </div>
 </div>
 
-<div class="editor-label">
+<div class="form-group">
     @Html.LabelFor(a => a.Image)
+    @Html.TextBoxFor(a => a.Image, new { @class = "form-control" })
+    <img src="@Model.Image" />
 </div>
-<div class="editor-field">
-    @Html.EditorFor(a => a.Image)
-</div>
-
-<img src="@Model.Image" />

@@ -17,17 +17,15 @@ main {
 h1 {
     display: inline-block;
 	font-family: 'Lobster', sans-serif;
-	font-size: 2.5em;
-	padding: 10px;
+	font-size: 3em;
 }
 h2 {
 	font-family: 'Cuprum', sans-serif;
-	font-size: 1.5em;
-	padding: 10px;
+	font-size: 1.7em;
 }
 p, li {
 	font-family: 'Cuprum', sans-serif;
-	padding: 3px 0px;
+    font-size: 1.15em;
 }
 ol {
     list-style: decimal inside none;
@@ -55,6 +53,7 @@ img.small {
 	margin: 10px;
 	border: 1px solid #BFBFBF;
 	border-radius: 10px;
+    width: 290px;
 
     -webkit-box-shadow: 0px 0px 15px 1px rgba(204,204,204,1);
     -moz-box-shadow: 0px 0px 15px 1px rgba(204,204,204,1);
@@ -113,7 +112,11 @@ a#home:hover {
     margin-right: auto;
 }
 
-form {
-    text-align: left;
+.form-group {
+
 }
+
+
+
+
 

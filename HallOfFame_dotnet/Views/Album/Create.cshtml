@@ -6,31 +6,32 @@
 
 @if (Model == null)
 {
-    using (Html.BeginForm("Create", "Album", FormMethod.Post))
-    {
-        <div class="editor-label">
-            @Html.LabelFor(a => a.Artist)
-        </div>
-        <div class="editor-field">
-            @Html.TextBoxFor(a => a.Artist, new { Name = "artistInput" })
-        </div>
-        <div class="editor-label">
-            @Html.LabelFor(a => a.Name)
-        </div>
-        <div class="editor-field">
-            @Html.TextBoxFor(a => a.Name, new { Name = "albumNameInput" })
-        </div>
-        <input type="submit" value="Create album" />
-    }
+    <div class="container">
+        @using (Html.BeginForm("Create", "Album", FormMethod.Post, new { role = "form" }))
+        {
+            <div class="form-group">
+                @Html.LabelFor(a => a.Artist)
+                @Html.TextBoxFor(a => a.Artist, new { Name = "artistInput", @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(a => a.Name)
+                @Html.TextBoxFor(a => a.Name, new { Name = "albumNameInput", @class = "form-control" })
+            </div>
+
+            <button type="submit" value="Create album" class="btn btn-primary">Create album</button>
+        }
+    </div>
 }
 else
 {
     <p>Check album information:</p>
-    <div id="newAlbum">
-        @using (Html.BeginForm("Add", "Album", FormMethod.Post))
+    <div class="container">
+        @using (Html.BeginForm("Add", "Album", FormMethod.Post, new { role = "form" }))
         {
             @Html.EditorForModel()
-            <input type="submit" value="Add album" />
+            
+            <button type="submit" value="Create album" class="btn btn-primary">Add album</button>
         }
     </div>
 }
