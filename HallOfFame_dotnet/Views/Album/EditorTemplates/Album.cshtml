@@ -1,0 +1,13 @@
+﻿@model HallOfFame_dotnet.Models.Album
+           
+<p>Artist:</p>@Html.EditorFor(a => a.Artist)
+<p>Album name:</p>@Html.EditorFor(a => a.Name)
+<p>Year:</p>@Html.EditorFor(a => a.Year)
+<p>Description:</p>@Html.TextAreaFor(a => a.Description, 15, 55, null)
+
+<div id="tracklist">
+    @Html.EditorFor(a => a.Tracklist)
+</div>
+
+<p>Image:</p>@Html.EditorFor(a => a.Image)
+<img src="@Model.Image" />

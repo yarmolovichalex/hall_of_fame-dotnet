@@ -98,4 +98,7 @@ a#home:hover {
 ol {
     list-style: decimal inside none;
 }
+#newAlbum {
+    max-width: 900px;
+}
 
