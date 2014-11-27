@@ -1,8 +1,8 @@
 ﻿@model HallOfFame_dotnet.Models.Album
-          
+
 <div class="editor-label">
     @Html.LabelFor(a => a.Artist)
-</div> 
+</div>
 <div class="editor-field">
     @Html.EditorFor(a => a.Artist)
 </div>
@@ -31,10 +31,21 @@
 <div class="editor-label">
     @Html.LabelFor(a => a.Tracklist)
 </div>
-<div class="editor-field">
-    <div id="tracklist">
+<div id="tracklist">
+    <table>
+        <tr>
+            <th>
+                <label>Number</label>
+            </th>
+            <th>
+                <label>Name</label>
+            </th>
+            <th>
+                <label>Duration</label>
+            </th>
+        </tr>
         @Html.EditorFor(a => a.Tracklist)
-    </div>
+    </table>
 </div>
 
 <div class="editor-label">
