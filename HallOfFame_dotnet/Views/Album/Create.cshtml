@@ -5,24 +5,33 @@
 }
 
 @if (Model == null)
-{ 
+{
     using (Html.BeginForm("Create", "Album", FormMethod.Post))
     {
-        <p>Artist:</p>@Html.TextBox("artistInput")
-        <p>Album name:</p>@Html.TextBox("albumNameInput")
+        <div class="editor-label">
+            @Html.LabelFor(a => a.Artist)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(a => a.Artist, new { Name = "artistInput" })
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(a => a.Name)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(a => a.Name, new { Name = "albumNameInput" })
+        </div>
         <input type="submit" value="Create album" />
     }
 }
 else
 {
     <p>Check album information:</p>
-    using (Html.BeginForm("Add", "Album", FormMethod.Post))
-    {
-        <div id="newAlbum">
+    <div id="newAlbum">
+        @using (Html.BeginForm("Add", "Album", FormMethod.Post))
+        {
             @Html.EditorForModel()
-        </div>
-        
-        <input type="submit" value="Add album" />
-    }
+            <input type="submit" value="Add album" />
+        }
+    </div>
 }
 

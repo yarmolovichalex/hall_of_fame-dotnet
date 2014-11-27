@@ -1,11 +1,25 @@
 ﻿@model HallOfFame_dotnet.Models.Track
-           
+
 <div class="track">
-    <p>
-        <label>@Model.Number</label>
-        @Html.TextBoxFor(t => t.Name)
-        @Html.TextBoxFor(t => t.Duration)
-        @Html.HiddenFor(t => t.Number)
-    </p>
+    <div class="editor-label">
+        @Html.LabelFor(t => t.Number)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(t => t.Number)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(t => t.Name)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(t => t.Name)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(t => t.Duration)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(t => t.Duration)
+    </div>
 </div>
 

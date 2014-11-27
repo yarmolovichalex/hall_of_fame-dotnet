@@ -1,11 +1,19 @@
-body {
+html {
 	background-color: #F5F8FA;
-	color: #1F1F1F;
-    background: url("/Content/subtle_grunge.png");
+    background: url("/Content/gray_jean.png");
+    height:100%;
 }
-header {
+body {
+    background: url("/Content/grid.png"); 
+	width: 1300px;
+    margin: 0px auto;
     text-align: center;
+    min-height:100%;
 }
+main {
+	margin: auto;
+}
+
 h1 {
     display: inline-block;
 	font-family: 'Lobster', sans-serif;
@@ -21,11 +29,10 @@ p, li {
 	font-family: 'Cuprum', sans-serif;
 	padding: 3px 0px;
 }
-.main {
-	max-width: 1260px;
-	margin: auto;
-	text-align: center;
+ol {
+    list-style: decimal inside none;
 }
+
 img {
     max-width: 600px;
     max-height: 600px;
@@ -39,6 +46,7 @@ img.small {
     -moz-box-shadow: 0px 0px 15px 1px rgba(163,163,163,1);
     box-shadow: 0px 0px 15px 1px rgba(163,163,163,1);
 }
+
 .album {
     background: url("/Content/gray_jean.png");
 	display: none;
@@ -57,6 +65,7 @@ img.small {
     -moz-box-shadow: 0px 0px 15px 4px rgba(163,163,163,1);
     box-shadow: 0px 0px 15px 4px rgba(163,163,163,1);
 }
+
 input {
     display: block;
 }
@@ -86,7 +95,9 @@ input {
     padding: 10px;
     border: 1px solid #BFBFBF;
 	border-radius: 5px;
+    background: url("/Content/gray_jean.png");
 }
+
 a#home {
     text-decoration: none;
     color: #1F1F1F;
@@ -95,10 +106,14 @@ a#home:hover {
     text-decoration: none;
     color: #B73045;
 }
-ol {
-    list-style: decimal inside none;
-}
+
 #newAlbum {
-    max-width: 900px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+form {
+    text-align: left;
 }
 

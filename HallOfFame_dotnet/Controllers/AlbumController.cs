@@ -47,7 +47,7 @@ namespace HallOfFame_dotnet.Controllers
             return View(album);
         }
 
-        [HttpPost]
+        [HttpPost, ValidateInput(false)]
         public ActionResult Add(Album album)
         {
             context.Albums.Add(album);

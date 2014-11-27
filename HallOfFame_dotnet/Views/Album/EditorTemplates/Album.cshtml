@@ -1,13 +1,47 @@
 ﻿@model HallOfFame_dotnet.Models.Album
-           
-<p>Artist:</p>@Html.EditorFor(a => a.Artist)
-<p>Album name:</p>@Html.EditorFor(a => a.Name)
-<p>Year:</p>@Html.EditorFor(a => a.Year)
-<p>Description:</p>@Html.TextAreaFor(a => a.Description, 15, 55, null)
-
-<div id="tracklist">
-    @Html.EditorFor(a => a.Tracklist)
+          
+<div class="editor-label">
+    @Html.LabelFor(a => a.Artist)
+</div> 
+<div class="editor-field">
+    @Html.EditorFor(a => a.Artist)
 </div>
 
-<p>Image:</p>@Html.EditorFor(a => a.Image)
+<div class="editor-label">
+    @Html.LabelFor(a => a.Name)
+</div>
+<div class="editor-field">
+    @Html.TextBoxFor(a => a.Name)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(a => a.Year)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(a => a.Year)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(a => a.Description)
+</div>
+<div class="editor-field">
+    @Html.TextAreaFor(a => a.Description, 15, 55, null)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(a => a.Tracklist)
+</div>
+<div class="editor-field">
+    <div id="tracklist">
+        @Html.EditorFor(a => a.Tracklist)
+    </div>
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(a => a.Image)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(a => a.Image)
+</div>
+
 <img src="@Model.Image" />

@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace HallOfFame_dotnet.Models
 {
     public class Album
     {
         public int ID { get; set; }
+        [DisplayName("Album name")]
         public string Name { get; set; }
         public string Artist { get; set; }
         public int? Year { get; set; }
