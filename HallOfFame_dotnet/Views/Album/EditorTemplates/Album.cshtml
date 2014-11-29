@@ -10,38 +10,42 @@
     @Html.TextBoxFor(a => a.Name, new { @class = "form-control" })
 </div>
 
-<div class="form-group">
-    @Html.LabelFor(a => a.Year)
-    @Html.TextBoxFor(a => a.Year, new { @class = "form-control" })
-</div>
+<div id="lastfmInfo">
 
-<div class="form-group">
-    @Html.LabelFor(a => a.Description)
-    @Html.TextAreaFor(a => a.Description, 15, 55, new { @class = "form-control" })
-</div>
-
-<div class="form-group">
-    @Html.LabelFor(a => a.Tracklist)
-    <div id="tracklist">
-        <table>
-            <tr>
-                <th>
-                    <label>Number</label>
-                </th>
-                <th>
-                    <label>Name</label>
-                </th>
-                <th>
-                    <label>Duration</label>
-                </th>
-            </tr>
-            @Html.EditorFor(a => a.Tracklist)
-        </table>
+    <div class="form-group">
+        @Html.LabelFor(a => a.Year)
+        @Html.TextBoxFor(a => a.Year, new { @class = "form-control" })
     </div>
-</div>
 
-<div class="form-group">
-    @Html.LabelFor(a => a.Image)
-    @Html.TextBoxFor(a => a.Image, new { @class = "form-control" })
-    <img src="@Model.Image" />
+    <div class="form-group">
+        @Html.LabelFor(a => a.Description)
+        @Html.TextAreaFor(a => a.Description, 15, 55, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(a => a.Tracklist)
+        <div id="tracklist">
+            <table>
+                <tr>
+                    <th>
+                        <label>Number</label>
+                    </th>
+                    <th>
+                        <label>Name</label>
+                    </th>
+                    <th>
+                        <label>Duration</label>
+                    </th>
+                </tr>
+                @Html.EditorFor(a => a.Tracklist)
+            </table>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(a => a.Image)
+        @Html.TextBoxFor(a => a.Image, new { @class = "form-control" })
+        <img src="@Model.Image" />
+    </div>
+
 </div>

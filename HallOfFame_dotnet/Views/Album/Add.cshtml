@@ -1,0 +1,26 @@
+﻿@using HallOfFame_dotnet.Models
+@model Album
+@{
+    ViewBag.Title = "Add album";
+}
+
+<div class="container">
+    @using (Html.BeginForm(ViewBag.IsUserInput ? "GetAlbumInfo" : "Add", "Album", FormMethod.Post, new {role = "form"}))
+    {
+        @Html.EditorForModel()
+        <button type="submit" value="Add album" class="btn btn-primary">Add album</button>
+        @*if (!ViewBag.IsUserInput)
+        {
+            <script>
+                $(document).ready(function() {
+                    $('#lastfmInfo').removeClass('hidden');
+                });
+            </script>
+        }*@
+    }
+</div>
+
+
+
+
+

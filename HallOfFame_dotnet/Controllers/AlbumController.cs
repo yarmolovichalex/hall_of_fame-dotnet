@@ -24,19 +24,20 @@ namespace HallOfFame_dotnet.Controllers
         }
 
         [HttpGet]
-        public ActionResult Create()
+        public ActionResult Add()
         {
-            return View();
+            ViewBag.IsUserInput = true;
+            return View(new Album());
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(string artistInput, string albumNameInput)
+        public async Task<ActionResult> GetAlbumInfo(Album album)
         {
             var uri = new Uri(WebConfigurationManager.AppSettings["lastfmApi"])
                     .AddQuery("method", "album.getInfo")
-                    .AddQuery("artist", artistInput)
-                    .AddQuery("album", albumNameInput)
-                    .AddQuery("api_key", WebConfigurationManager.AppSettings["lastfmKey"]);
+                    .AddQuery("artist", album.Artist)
+                    .AddQuery("album", album.Name)
+                    .AddQuery("api_key", WebConfigurationManager.AppSettings["lastfmKey"]); // TODO русские символы
 
             var response = await new HttpClient().GetAsync(uri).Result.Content.ReadAsStringAsync();
             XDocument doc = XDocument.Parse(response);
@@ -45,11 +46,10 @@ namespace HallOfFame_dotnet.Controllers
             if (status == "failed")
                 return new ContentResult { Content = doc.Root.Element("error").Value }; // TODO переделать
 
-            Album album = ParseResponse(doc);
+            album = ParseResponse(doc);
 
-            // TODO errors handling
-
-            return View(album);
+            ViewBag.IsUserInput = false;
+            return View("Add", album);
         }
 
         [HttpPost, ValidateInput(false)]
