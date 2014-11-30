@@ -45,7 +45,7 @@ img.small {
     background: url("/Content/gray_jean.png");
 	display: none;
 	text-align: left;
-	padding: 15px;
+	padding: 10px 15px 15px 15px;
 	margin: 10px;
     width: 280px;
 
@@ -114,4 +114,8 @@ a#home:hover {
 
 .navbar {
     margin-bottom: 10px;
+}
+
+.album form {
+    display: inline;
 }

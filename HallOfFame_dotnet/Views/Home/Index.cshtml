@@ -4,25 +4,27 @@
     @foreach (var album in Model)
     {
         <div class="album">
-            @using (Html.BeginForm("Index", "Album", FormMethod.Get, new {role="form"}))
+            <div class="form-group">
+                @Html.LabelFor(item => album.Artist)
+                @Html.DisplayFor(item => album.Artist)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(item => album.Name)
+                @Html.DisplayFor(item => album.Name)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(item => album.Year)
+                @Html.DisplayFor(item => album.Year)
+            </div>
+            <a class="fancyBox" rel="group" href="@album.Image"><img class="small" src="@album.Image" /></a>
+
+            @using (Html.BeginForm("Index", "Album", new {id = album.ID}))
             {
-                <div class="form-group">
-                    @Html.HiddenFor(id => album.ID, new {Name = "id"})
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(item => album.Artist)
-                    @Html.DisplayFor(item => album.Artist)
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(item => album.Name)
-                    @Html.DisplayFor(item => album.Name)
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(item => album.Year)
-                    @Html.DisplayFor(item => album.Year)
-                </div>
-                <a class="fancyBox" rel="group" href="@album.Image"><img class="small" src="@album.Image" /></a>
-                <button type="submit" value="moreInformation" class="btn btn-default">More information</button>
+                <button type="submit" value="moreInformation" class="btn btn-info"><span class="glyphicon glyphicon-th-list"></span></button>
+            }
+            @using (Html.BeginForm("Remove", "Album", new { id = album.ID }))
+            {
+                <button type="submit" value="removeAlbum" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
             }
         </div>
     }

@@ -64,13 +64,23 @@ namespace HallOfFame_dotnet.Controllers
             return View("Add", album);
         }
 
-        [HttpPost, ValidateInput(false)]
+        [HttpPost, ValidateInput(false)] // TODO пока не валидировать
         public ActionResult Add(Album album)
         {
             context.Albums.Add(album);
             context.SaveChanges();
 
             return RedirectToAction("Index", new { id = album.ID });
+        }
+
+        public ActionResult Remove(int id)
+        {
+            var album = context.Albums.FirstOrDefault(a => a.ID == id);
+
+            context.Albums.Remove(album);
+            context.SaveChanges();
+
+            return RedirectToAction("Index", "Home");
         }
 
         private Album ParseResponse(XDocument doc)
