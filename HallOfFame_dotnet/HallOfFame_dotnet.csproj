@@ -94,6 +94,7 @@
     <Content Include="Content\gray_jean.png" />
     <Content Include="Content\grid.png" />
     <Content Include="Content\jquery.fancybox.css" />
+    <Content Include="Content\nasty_fabric.png" />
     <Content Include="Content\reset.css" />
     <Content Include="Content\style.css" />
     <Content Include="Global.asax" />

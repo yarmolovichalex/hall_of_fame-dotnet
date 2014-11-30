@@ -101,7 +101,6 @@ a#home {
     color: #1F1F1F;
 }
 a#home:hover {
-    
     text-decoration: none;
     color: #B73045;
 }
@@ -114,8 +113,16 @@ a#home:hover {
 
 .navbar {
     margin-bottom: 10px;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    background: url("/Content/nasty_fabric.png");
 }
 
 .album form {
     display: inline;
+}
+
+.nav .navbar-nav {
+    background: transparent;
 }
