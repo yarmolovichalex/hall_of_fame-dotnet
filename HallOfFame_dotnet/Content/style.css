@@ -8,17 +8,12 @@ body {
     height: 100%;
 }
 .page-wrap {
-    width: 1250px;
+    width: 1240px;
     background: url("/Content/grid.png");
     margin: 0px auto;
     min-height: 100%;
 }
     
-h1 {
-    display: inline-block;
-	font-family: 'Lobster', sans-serif;
-	font-size: 3em;
-}
 h2 {
 	font-family: 'Cuprum', sans-serif;
 	font-size: 1.7em;
@@ -100,10 +95,13 @@ input {
 }
 
 a#home {
+    font-family: 'Lobster', sans-serif;
+	font-size: 2em;
     text-decoration: none;
     color: #1F1F1F;
 }
 a#home:hover {
+    
     text-decoration: none;
     color: #B73045;
 }
@@ -114,4 +112,6 @@ a#home:hover {
     margin-right: auto;
 }
 
-
+.navbar {
+    margin-bottom: 10px;
+}
