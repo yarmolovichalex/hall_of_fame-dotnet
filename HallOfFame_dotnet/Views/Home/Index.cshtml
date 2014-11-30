@@ -1,13 +1,20 @@
 ﻿@model List<HallOfFame_dotnet.Models.Album>
 
-@foreach (var album in Model)
+<div class="container-fluid">
+    @foreach (var album in Model)
+    {
+        <div class="album">
+            <p>Artist: @album.Artist</p>
+            <p>Album name: @album.Name</p>
+            <p>Year: @album.Year</p>
+            <a class="fancyBox" rel="group" href="@album.Image"><img class="small" src="@album.Image" /></a>
+            <input type="button" value="Подробнее" onclick="location.href='@Url.Action("Index", "Album", new { id = album.ID })'" />
+        </div>
+    }
+</div>
+
+@section Scripts
 {
-    <div class="album">
-        <p>Artist: @album.Artist</p>
-        <p>Album name: @album.Name</p>
-        <p>Year: @album.Year</p>
-        <a class="fancyBox" rel="group" href="@album.Image"><img class="small" src="@album.Image" /></a>
-        <input type="button" value="Подробнее" onclick="location.href='@Url.Action("Index", "Album", new { id = album.ID })'" />
-    </div>
+    <script type="text/javascript" src="/Scripts/mainPage.js"></script>
 }
 

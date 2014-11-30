@@ -5,20 +5,26 @@
 }
 
 <div class="container">
-    @using (Html.BeginForm(ViewBag.IsUserInput ? "GetAlbumInfo" : "Add", "Album", FormMethod.Post, new {role = "form"}))
+    @using (Html.BeginForm(ViewBag.IsUserInput ? "GetAlbumInfo" : "Add", "Album", FormMethod.Post, new { role = "form" }))
     {
         @Html.EditorForModel()
         <button type="submit" value="Add album" class="btn btn-primary">Add album</button>
-        @*if (!ViewBag.IsUserInput)
+        if (!ViewBag.IsUserInput)
         {
-            <script>
-                $(document).ready(function() {
-                    $('#lastfmInfo').removeClass('hidden');
-                });
-            </script>
-        }*@
+            @section Scripts
+            {
+                <script type="text/javascript" src="@Url.Content("~/Scripts/showLastfmInfo.js")"></script>
+            }
+        }
     }
 </div>
+
+
+
+
+
+
+
 
 
 

@@ -39,7 +39,15 @@ namespace HallOfFame_dotnet.Controllers
                     .AddQuery("album", album.Name)
                     .AddQuery("api_key", WebConfigurationManager.AppSettings["lastfmKey"]); // TODO русские символы
 
-            var response = await new HttpClient().GetAsync(uri).Result.Content.ReadAsStringAsync();
+            string response;
+            try
+            {
+                response = await new HttpClient().GetAsync(uri).Result.Content.ReadAsStringAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
             XDocument doc = XDocument.Parse(response);
 
             string status = doc.Root.Attribute("status").Value;
@@ -49,6 +57,10 @@ namespace HallOfFame_dotnet.Controllers
             album = ParseResponse(doc);
 
             ViewBag.IsUserInput = false;
+
+            // чтобы заполнить форму новыми значениями
+            ModelState.Clear();
+
             return View("Add", album);
         }
 

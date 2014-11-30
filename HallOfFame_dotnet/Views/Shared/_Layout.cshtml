@@ -16,8 +16,6 @@
 
     <link rel="stylesheet" type="text/css" href="/Content/style.css">
     <link rel="stylesheet" href="/Content/jquery.fancybox.css" type="text/css" media="screen" />
-    
-   
 </head>
 <body>
     <header>
@@ -30,8 +28,10 @@
         @RenderBody()
     </main>
     <footer></footer>
+    
     <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-    <script type="text/javascript" src="/Scripts/app.js"></script>
     <script type="text/javascript" src="/Scripts/jquery.fancybox.pack.js"></script>
+    
+    @RenderSection("Scripts", false)
 </body>
 </html>
