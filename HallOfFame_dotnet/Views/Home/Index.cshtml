@@ -18,11 +18,11 @@
             </div>
             <a class="fancyBox" rel="group" href="@album.Image"><img class="small" src="@album.Image" /></a>
 
-            @using (Html.BeginForm("Index", "Album", new {id = album.ID}))
+            @using (Html.BeginForm("Index", "Album", new {artist = album.Artist, albumName = album.Name}))
             {
                 <button type="submit" value="moreInformation" class="btn btn-info"><span class="glyphicon glyphicon-th-list"></span></button>
             }
-            @using (Html.BeginForm("Remove", "Album", new { id = album.ID }))
+            @using (Html.BeginForm("Remove", "Album", new {artist = album.Artist, albumName = album.Name}))
             {
                 <button type="submit" value="removeAlbum" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
             }

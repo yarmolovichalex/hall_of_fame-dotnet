@@ -1,38 +1,32 @@
 ﻿@using HallOfFame_dotnet.Models
 @model Album
 
-@if (Model != null)
-{
-    <div class="album-page">
-        <div class="album-page-center">
-            <div class="album-image-big">
-                <img src="@Model.Image" />
-            </div>
-
-            <article class="info">
-                <p>Artist: @Model.Artist</p>
-                <p>Album name: @Model.Name</p>
-                <p>Year: @Model.Year</p>
-                <br />
-                <p>Tracklist:</p>
-                <ol>
-                    @foreach (Track t in Model.Tracklist.OrderBy(t => t.Number))
-                    {
-                        <li>@t.Name</li>
-                    }
-                </ol>
-                @if (!string.IsNullOrEmpty(Model.Description))
-                {
-                    <br />
-                    <p>@Html.Raw(Model.Description)</p>
-                }
-            </article>
+<div class="album-page">
+    <div class="album-page-center">
+        <div class="album-image-big">
+            <img src="@Model.Image" />
         </div>
+
+        <article class="info">
+            <p>Artist: @Model.Artist</p>
+            <p>Album name: @Model.Name</p>
+            <p>Year: @Model.Year</p>
+            <br />
+            <p>Tracklist:</p>
+            <ol>
+                @foreach (Track t in Model.Tracklist.OrderBy(t => t.Number))
+                {
+                    <li>@t.Name</li>
+                }
+            </ol>
+            @if (!string.IsNullOrEmpty(Model.Description))
+            {
+                <br />
+                <p>@Html.Raw(Model.Description)</p>
+            }
+        </article>
     </div>
-}
-else
-{
-    <p>Error: no such album!</p>
-}
+</div>
+
 
 

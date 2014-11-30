@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -8,7 +9,6 @@ using System.Web.Mvc;
 using System.Xml.Linq;
 using HallOfFame_dotnet.Infrastructure;
 using HallOfFame_dotnet.Models;
-using HallOfFame_dotnet.Utils;
 
 namespace HallOfFame_dotnet.Controllers
 {
@@ -16,28 +16,24 @@ namespace HallOfFame_dotnet.Controllers
     {
         private readonly AlbumContext context = new AlbumContext();
 
-        public ActionResult Index(int id)
+        public ActionResult Index(string artist, string albumName)
         {
-            var album = context.Albums.FirstOrDefault(a => a.ID == id);
+            var album = context.Albums.FirstOrDefault(a => (a.Artist == artist && a.Name == albumName));
 
             return View(album);
         }
 
         [HttpGet]
-        public ActionResult Add()
+        public async Task<ActionResult> Add(string artist, string name)
         {
-            ViewBag.IsUserInput = true;
-            return View(new Album());
-        }
+            if (string.IsNullOrEmpty(artist) || string.IsNullOrEmpty(name))
+            {
+                ViewBag.IsUserInput = true;
+                return View(new Album());
+            }
 
-        [HttpPost]
-        public async Task<ActionResult> GetAlbumInfo(Album album)
-        {
-            var uri = new Uri(WebConfigurationManager.AppSettings["lastfmApi"])
-                    .AddQuery("method", "album.getInfo")
-                    .AddQuery("artist", album.Artist)
-                    .AddQuery("album", album.Name)
-                    .AddQuery("api_key", WebConfigurationManager.AppSettings["lastfmKey"]); // TODO русские символы
+            var uri = new Uri(string.Format("{0}?method=album.getInfo&artist={1}&album={2}&api_key={3}", 
+                WebConfigurationManager.AppSettings["lastfmApi"], artist, name, WebConfigurationManager.AppSettings["lastfmKey"]));
 
             string response;
             try
@@ -54,7 +50,7 @@ namespace HallOfFame_dotnet.Controllers
             if (status == "failed")
                 return new ContentResult { Content = doc.Root.Element("error").Value }; // TODO переделать
 
-            album = ParseResponse(doc);
+            Album album = ParseResponse(doc);
 
             ViewBag.IsUserInput = false;
 
@@ -67,15 +63,23 @@ namespace HallOfFame_dotnet.Controllers
         [HttpPost, ValidateInput(false)] // TODO пока не валидировать
         public ActionResult Add(Album album)
         {
-            context.Albums.Add(album);
-            context.SaveChanges();
+            try
+            {
+                context.Albums.Add(album);
+                context.SaveChanges();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                var error = ex.EntityValidationErrors;
+                throw;
+            }
 
-            return RedirectToAction("Index", new { id = album.ID });
+            return RedirectToAction("Index", new { artist = album.Artist, albumName = album.Name });
         }
 
-        public ActionResult Remove(int id)
+        public ActionResult Remove(string artist, string albumName)
         {
-            var album = context.Albums.FirstOrDefault(a => a.ID == id);
+            var album = context.Albums.FirstOrDefault(a => (a.Artist == artist && a.Name == albumName));
 
             context.Albums.Remove(album);
             context.SaveChanges();
