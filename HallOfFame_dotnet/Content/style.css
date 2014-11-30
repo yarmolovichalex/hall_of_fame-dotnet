@@ -126,3 +126,10 @@ a#home:hover {
 .nav .navbar-nav {
     background: transparent;
 }
+
+.menu form {
+    opacity: 0.3;
+}
+.menu form:hover {
+    opacity: 1;
+}
