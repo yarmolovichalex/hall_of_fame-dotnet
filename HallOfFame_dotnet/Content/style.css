@@ -127,9 +127,17 @@ a#home:hover {
     background: transparent;
 }
 
-.menu form {
+.menu .left {
     opacity: 0.3;
+    float: left;
 }
-.menu form:hover {
+.menu .right {
+    opacity: 0.3;
+    float: right;
+}
+.menu .left:hover {
+    opacity: 1;
+}
+.menu .right:hover {
     opacity: 1;
 }

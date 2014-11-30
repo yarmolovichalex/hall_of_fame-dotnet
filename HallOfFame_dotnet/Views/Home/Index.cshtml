@@ -21,11 +21,11 @@
             <div class="menu">
                 @using (Html.BeginForm("Index", "Album", new { artist = album.Artist, albumName = album.Name }))
                 {
-                    <button type="submit" value="moreInformation" class="btn btn-info"><span class="glyphicon glyphicon-th-list"></span></button>
+                    <button type="submit" value="moreInformation" class="btn btn-info left"><span class="glyphicon glyphicon-th-list"></span></button>
                 }
                 @using (Html.BeginForm("Remove", "Album", new { artist = album.Artist, albumName = album.Name }))
                 {
-                    <button type="submit" value="removeAlbum" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
+                    <button type="submit" value="removeAlbum" class="btn btn-danger right"><span class="glyphicon glyphicon-remove"></span></button>
                 }
             </div>
         </div>
