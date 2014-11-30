@@ -17,21 +17,24 @@
     <link rel="stylesheet" type="text/css" href="/Content/style.css">
     <link rel="stylesheet" href="/Content/jquery.fancybox.css" type="text/css" media="screen" />
 </head>
-<body>
-    <header>
-        <a id="home" href="@Url.Action("Index", "Home")"><h1>Hall of Fame</h1></a>
-        <h2>
-            Здесь я буду выкладывать описания альбомов, которые понравились мне больше всего
-        </h2>
-    </header>
-    <main>
-        @RenderBody()
-    </main>
-    <footer></footer>
+    <body>
+        <div class="page-wrap">
+            <header>
+                <a id="home" href="@Url.Action("Index", "Home")"><h1>Hall of Fame</h1></a>
+                <h2>
+                    Здесь я буду выкладывать описания альбомов, которые понравились мне больше всего
+                </h2>
+            </header>
+            <main>
+                @RenderBody()
+            </main>
+            <footer></footer>
+        </div>
+        
     
-    <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-    <script type="text/javascript" src="/Scripts/jquery.fancybox.pack.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+        <script type="text/javascript" src="/Scripts/jquery.fancybox.pack.js"></script>
     
-    @RenderSection("Scripts", false)
-</body>
+        @RenderSection("Scripts", false)
+    </body>
 </html>
