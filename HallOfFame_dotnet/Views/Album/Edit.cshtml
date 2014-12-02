@@ -4,7 +4,7 @@
 }
 
 <div class="container">
-    @using (Html.BeginForm("Add", "Album", FormMethod.Post, new { role = "form" }))
+    @using (Html.BeginForm("Save", "Album", FormMethod.Post, new { role = "form" }))
     {
         @Html.EditorForModel()
         <button type="submit" value="Add album" class="btn btn-primary">Add album</button>

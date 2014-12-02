@@ -23,32 +23,42 @@ namespace HallOfFame_dotnet.Controllers
         }
 
         [HttpGet]
-        public ActionResult Add()
+        public ActionResult Create()
         {
             return View(new AlbumCreateModel());
         }
 
         [HttpPost]
-        public ActionResult Edit(AlbumCreateModel model)
+        public ActionResult Create(AlbumCreateModel model)
         {
             if (ModelState.IsValid)
             {
-                AlbumEditModel album = GetLastfmAlbumInfo(model).Result;
-                return View("Edit", album);
+                TempData["model"] = model;
+                return RedirectToAction("Edit", new {model});
             }
-            else
+            return View();
+        }
+
+        public ActionResult Edit(AlbumCreateModel model)
+        {
+            if (model == null)
             {
-                return View("Add", model);  // TODO
+                model = (AlbumCreateModel)TempData["model"];
             }
+            AlbumEditModel album = GetLastfmAlbumInfo(model).Result;
+            return View(album);
         }
 
         [HttpPost, ValidateInput(false)] // TODO пока не валидировать
-        public ActionResult Add(AlbumEditModel album)
+        public ActionResult Save(AlbumEditModel album)
         {
-            context.Albums.Add(Mapper.MapToAlbum(album));
-            context.SaveChanges();
-
-            return RedirectToAction("Index", new { artist = album.Artist, albumName = album.Name });
+            if (ModelState.IsValid)
+            {
+                context.Albums.Add(Mapper.MapToAlbum(album));
+                context.SaveChanges();
+                return RedirectToAction("Index", new { artist = album.Artist, albumName = album.Name });
+            }
+            return View("Edit");
         }
 
         public ActionResult Remove(string artist, string albumName)
