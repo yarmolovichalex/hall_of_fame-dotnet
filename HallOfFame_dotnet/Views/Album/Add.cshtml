@@ -1,32 +1,17 @@
-﻿@using HallOfFame_dotnet.Models
-@model Album
+﻿@using System.Web.UI.WebControls
+@model HallOfFame_dotnet.Models.AlbumCreateModel
 @{
     ViewBag.Title = "Add album";
 }
 
 <div class="container">
-    @if (ViewBag.IsUserInput)
+    @using (Html.BeginForm("Edit", "Album", FormMethod.Post, new { role = "form" }))
     {
-        using (Html.BeginForm("Add", "Album", FormMethod.Get, new { role = "form" }))
-        {
-            @Html.EditorForModel()
-            <button type="submit" value="Add album" class="btn btn-primary">Add album</button>
-        }
-    }
-    else
-    {
-        using (Html.BeginForm("Add", "Album", FormMethod.Post, new { role = "form" }))
-        {
-            @Html.EditorForModel()
-            <button type="submit" value="Add album" class="btn btn-primary">Add album</button>
-
-            @section Scripts
-            {
-                <script type="text/javascript" src="@Url.Content("~/Scripts/showLastfmInfo.js")"></script>
-            }
-        }
+        @Html.EditorForModel()
+        <button type="submit" value="Add album" class="btn btn-primary">Add album</button>
     }
 </div>
+
 
 
 

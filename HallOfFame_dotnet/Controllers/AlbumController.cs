@@ -24,40 +24,42 @@ namespace HallOfFame_dotnet.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Add(string artist, string name)
+        public ActionResult Add()
         {
-            if (string.IsNullOrEmpty(artist) || string.IsNullOrEmpty(name))
+            return View(new AlbumCreateModel());
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Edit(AlbumCreateModel model)
+        {
+            if (ModelState.IsValid)
             {
-                ViewBag.IsUserInput = true;
-                return View(new Album());
+                var uri = new Uri(string.Format("{0}?method=album.getInfo&artist={1}&album={2}&api_key={3}",
+                WebConfigurationManager.AppSettings["lastfmApi"], model.Artist, model.Name, WebConfigurationManager.AppSettings["lastfmKey"]));
+
+                string response;
+                try
+                {
+                    response = await new HttpClient().GetAsync(uri).Result.Content.ReadAsStringAsync();
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+                XDocument doc = XDocument.Parse(response);
+
+                string status = doc.Root.Attribute("status").Value;
+                if (status == "failed")
+                    return new ContentResult { Content = doc.Root.Element("error").Value }; // TODO переделать
+
+                Album album = ParseResponse(doc);
+
+                return View("Edit", album);
             }
-
-            var uri = new Uri(string.Format("{0}?method=album.getInfo&artist={1}&album={2}&api_key={3}", 
-                WebConfigurationManager.AppSettings["lastfmApi"], artist, name, WebConfigurationManager.AppSettings["lastfmKey"]));
-
-            string response;
-            try
+            else
             {
-                response = await new HttpClient().GetAsync(uri).Result.Content.ReadAsStringAsync();
+                return RedirectToAction("Add", model);  // TODO
             }
-            catch (Exception)
-            {
-                throw;
-            }
-            XDocument doc = XDocument.Parse(response);
-
-            string status = doc.Root.Attribute("status").Value;
-            if (status == "failed")
-                return new ContentResult { Content = doc.Root.Element("error").Value }; // TODO переделать
-
-            Album album = ParseResponse(doc);
-
-            ViewBag.IsUserInput = false;
-
-            // чтобы заполнить форму новыми значениями
-            ModelState.Clear();
-
-            return View("Add", album);
         }
 
         [HttpPost, ValidateInput(false)] // TODO пока не валидировать

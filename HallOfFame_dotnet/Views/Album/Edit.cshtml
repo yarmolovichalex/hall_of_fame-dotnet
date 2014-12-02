@@ -1,0 +1,13 @@
+﻿@model HallOfFame_dotnet.Models.Album
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="container">
+    @using (Html.BeginForm("Add", "Album", FormMethod.Post, new { role = "form" }))
+    {
+        @Html.EditorForModel()
+        <button type="submit" value="Add album" class="btn btn-primary">Add album</button>
+    }
+</div>
