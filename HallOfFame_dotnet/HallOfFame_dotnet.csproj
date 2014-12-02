@@ -131,6 +131,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AlbumController.cs" />
+    <Compile Include="Infrastructure\Mapper.cs" />
     <Compile Include="Models\AlbumCreateModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -138,6 +139,8 @@
     </Compile>
     <Compile Include="Infrastructure\AlbumContext.cs" />
     <Compile Include="Infrastructure\AlbumInitializer.cs" />
+    <Compile Include="Models\AlbumEditModel.cs" />
+    <Compile Include="Models\AlbumViewModel.cs" />
     <Compile Include="Models\Album.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -152,6 +155,7 @@
     <Content Include="Views\Album\EditorTemplates\Album.cshtml" />
     <Content Include="Views\Album\Edit.cshtml" />
     <Content Include="Views\Album\EditorTemplates\AlbumCreateModel.cshtml" />
+    <Content Include="Views\Album\EditorTemplates\AlbumEditModel.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

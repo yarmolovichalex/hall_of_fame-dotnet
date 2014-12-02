@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -20,7 +19,7 @@ namespace HallOfFame_dotnet.Controllers
         {
             var album = context.Albums.FirstOrDefault(a => (a.Artist == artist && a.Name == albumName));
 
-            return View(album);
+            return View(Mapper.MapToAlbumViewModel(album));
         }
 
         [HttpGet]
@@ -30,51 +29,24 @@ namespace HallOfFame_dotnet.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Edit(AlbumCreateModel model)
+        public ActionResult Edit(AlbumCreateModel model)
         {
             if (ModelState.IsValid)
             {
-                var uri = new Uri(string.Format("{0}?method=album.getInfo&artist={1}&album={2}&api_key={3}",
-                WebConfigurationManager.AppSettings["lastfmApi"], model.Artist, model.Name, WebConfigurationManager.AppSettings["lastfmKey"]));
-
-                string response;
-                try
-                {
-                    response = await new HttpClient().GetAsync(uri).Result.Content.ReadAsStringAsync();
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
-                XDocument doc = XDocument.Parse(response);
-
-                string status = doc.Root.Attribute("status").Value;
-                if (status == "failed")
-                    return new ContentResult { Content = doc.Root.Element("error").Value }; // TODO переделать
-
-                Album album = ParseResponse(doc);
-
+                AlbumEditModel album = GetLastfmAlbumInfo(model).Result;
                 return View("Edit", album);
             }
             else
             {
-                return RedirectToAction("Add", model);  // TODO
+                return View("Add", model);  // TODO
             }
         }
 
         [HttpPost, ValidateInput(false)] // TODO пока не валидировать
-        public ActionResult Add(Album album)
+        public ActionResult Add(AlbumEditModel album)
         {
-            try
-            {
-                context.Albums.Add(album);
-                context.SaveChanges();
-            }
-            catch (DbEntityValidationException ex)
-            {
-                var error = ex.EntityValidationErrors;
-                throw;
-            }
+            context.Albums.Add(Mapper.MapToAlbum(album));
+            context.SaveChanges();
 
             return RedirectToAction("Index", new { artist = album.Artist, albumName = album.Name });
         }
@@ -89,7 +61,32 @@ namespace HallOfFame_dotnet.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        private Album ParseResponse(XDocument doc)
+        private async Task<AlbumEditModel> GetLastfmAlbumInfo(AlbumCreateModel model)
+        {
+            var uri = new Uri(string.Format("{0}?method=album.getInfo&artist={1}&album={2}&api_key={3}",
+                WebConfigurationManager.AppSettings["lastfmApi"], model.Artist, model.Name, WebConfigurationManager.AppSettings["lastfmKey"]));
+
+            string response;
+            try
+            {
+                response = await new HttpClient().GetAsync(uri).Result.Content.ReadAsStringAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            XDocument doc = XDocument.Parse(response);
+
+            string status = doc.Root.Attribute("status").Value;
+            if (status == "failed")
+            {
+                //return new ContentResult { Content = doc.Root.Element("error").Value }; // TODO переделать
+            }
+
+            return ParseResponse(doc);
+        }
+
+        private AlbumEditModel ParseResponse(XDocument doc)
         {
             string artist = (string)doc.Root.Element("album").Element("artist");
             string albumName = (string)doc.Root.Element("album").Element("name");
@@ -116,12 +113,12 @@ namespace HallOfFame_dotnet.Controllers
                 Duration = int.Parse(track.Element("duration").Value)
             }).ToList();
 
-            return CreateAlbum(artist, albumName, image, year, tracks, description);
+            return Mapper.MapToAlbumEditModel(CreateAlbum(artist, albumName, image, year, tracks, description));
         }
 
         private Album CreateAlbum(string artist, string name, string image, int? year, List<Track> tracks, string description)
         {
-            return new Album()
+            return new Album
             {
                 Artist = artist,
                 Name = name,
