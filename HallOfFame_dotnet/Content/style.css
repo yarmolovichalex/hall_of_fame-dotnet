@@ -141,3 +141,10 @@ a#home:hover {
 .menu .right:hover {
     opacity: 1;
 }
+
+.js-hidden {
+    display:none;
+}
+.js-visible {
+    display: block;
+}

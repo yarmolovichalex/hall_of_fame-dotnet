@@ -19,46 +19,25 @@ namespace HallOfFame_dotnet.Controllers
         {
             var album = context.Albums.FirstOrDefault(a => (a.Artist == artist && a.Name == albumName));
 
-            return View(Mapper.MapToAlbumViewModel(album));
+            return View(album);
         }
 
         [HttpGet]
         public ActionResult Create()
         {
-            return View(new AlbumCreateModel());
-        }
-
-        [HttpPost]
-        public ActionResult Create(AlbumCreateModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                TempData["model"] = model;
-                return RedirectToAction("Edit", new {model});
-            }
-            return View();
-        }
-
-        public ActionResult Edit(AlbumCreateModel model)
-        {
-            if (model == null)
-            {
-                model = (AlbumCreateModel)TempData["model"];
-            }
-            AlbumEditModel album = GetLastfmAlbumInfo(model).Result;
-            return View(album);
+            return View(new Album { Tracklist = new Track[16]}); // TODO придумать способ добавлять поля для треков через jquery
         }
 
         [HttpPost, ValidateInput(false)] // TODO пока не валидировать
-        public ActionResult Save(AlbumEditModel album)
+        public ActionResult Create(Album album)
         {
             if (ModelState.IsValid)
             {
-                context.Albums.Add(Mapper.MapToAlbum(album));
+                context.Albums.Add(album);
                 context.SaveChanges();
                 return RedirectToAction("Index", new { artist = album.Artist, albumName = album.Name });
             }
-            return View("Edit");
+            return View("Create");
         }
 
         public ActionResult Remove(string artist, string albumName)
@@ -71,10 +50,10 @@ namespace HallOfFame_dotnet.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        private async Task<AlbumEditModel> GetLastfmAlbumInfo(AlbumCreateModel model)
+        public async Task<JsonResult> GetLastfmAlbumInfo(string artist, string name)
         {
             var uri = new Uri(string.Format("{0}?method=album.getInfo&artist={1}&album={2}&api_key={3}",
-                WebConfigurationManager.AppSettings["lastfmApi"], model.Artist, model.Name, WebConfigurationManager.AppSettings["lastfmKey"]));
+                WebConfigurationManager.AppSettings["lastfmApi"], artist, name, WebConfigurationManager.AppSettings["lastfmKey"]));
 
             string response;
             try
@@ -93,10 +72,10 @@ namespace HallOfFame_dotnet.Controllers
                 //return new ContentResult { Content = doc.Root.Element("error").Value }; // TODO переделать
             }
 
-            return ParseResponse(doc);
+            return Json(ParseResponse(doc), JsonRequestBehavior.AllowGet);
         }
 
-        private AlbumEditModel ParseResponse(XDocument doc)
+        private Album ParseResponse(XDocument doc)
         {
             string artist = (string)doc.Root.Element("album").Element("artist");
             string albumName = (string)doc.Root.Element("album").Element("name");
@@ -123,7 +102,7 @@ namespace HallOfFame_dotnet.Controllers
                 Duration = int.Parse(track.Element("duration").Value)
             }).ToList();
 
-            return Mapper.MapToAlbumEditModel(CreateAlbum(artist, albumName, image, year, tracks, description));
+            return CreateAlbum(artist, albumName, image, year, tracks, description);
         }
 
         private Album CreateAlbum(string artist, string name, string image, int? year, List<Track> tracks, string description)

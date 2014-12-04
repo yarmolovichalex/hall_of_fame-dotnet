@@ -1,12 +1,48 @@
-﻿@model HallOfFame_dotnet.Models.AlbumCreateModel
+﻿@using HallOfFame_dotnet.Models
+@model HallOfFame_dotnet.Models.Album
 @{
     ViewBag.Title = "Add album";
 }
 
 <div class="container">
-    @using (Html.BeginForm("Create", "Album", FormMethod.Post, new { role = "form" }))
+    @using (Html.BeginForm("Create", "Album", FormMethod.Post))
     {
         @Html.EditorForModel()
-        <button type="submit" value="Add album" class="btn btn-primary">Add album</button>
+        <div class="js-visible">
+            <button type="button" id="LookupAlbum">Lookup</button>
+        </div>
+        <button type="submit" value="Add new album" id="#AddNewAlbum" class="btn btn-info">Add album</button>
     }
 </div>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $('#LookupAlbum').on('click', function () {
+            var artist = $('#Artist').val();
+            var name = $('#Name').val();
+
+            $.get('@Url.Action("GetLastfmAlbumInfo")', { artist: artist, name: name }, function (result) {
+
+                console.log(result);
+
+                $('#Artist').val(result.Artist);
+                $('#Name').val(result.Name);
+                $('#Year').val(result.Year);
+                $('#Description').val(result.Description);
+
+                $.each(result.Tracklist, function (i) {
+                    $('#Tracklist_' + i + '__Number').val(result.Tracklist[i].Number);
+                    $('#Tracklist_' + i + '__Name').val(result.Tracklist[i].Name);
+                    $('#Tracklist_' + i + '__Duration').val(result.Tracklist[i].Duration);
+                });
+
+                $('#Image').val(result.Image);
+                $('#LastfmImage').attr('src', result.Image);
+
+                $('#LookupAlbum').hide();
+                $('#LastfmInfo').show();
+            });
+        });
+    </script>
+}

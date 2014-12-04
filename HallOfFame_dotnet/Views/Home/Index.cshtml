@@ -1,4 +1,4 @@
-﻿@model List<HallOfFame_dotnet.Models.AlbumViewModel>
+﻿@model List<HallOfFame_dotnet.Models.Album>
 
 <div class="fluid-container">
     @foreach (var album in Model)
@@ -34,6 +34,7 @@
 
 @section Scripts
 {
+    <script type="text/javascript" src="/Scripts/jquery.fancybox.pack.js"></script>
     <script type="text/javascript" src="/Scripts/mainPage.js"></script>
 }
 
