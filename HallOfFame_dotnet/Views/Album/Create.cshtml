@@ -1,5 +1,4 @@
-﻿@using HallOfFame_dotnet.Models
-@model HallOfFame_dotnet.Models.Album
+﻿@model HallOfFame_dotnet.Models.Album
 @{
     ViewBag.Title = "Add album";
 }
@@ -11,7 +10,7 @@
         <div class="js-visible">
             <button type="button" id="LookupAlbum">Lookup</button>
         </div>
-        <button type="submit" value="Add new album" id="#AddNewAlbum" class="btn btn-info">Add album</button>
+        <button type="submit" value="Add new album" id="AddNewAlbum" class="btn btn-info js-hidden">Add album</button>
     }
 </div>
 
@@ -19,29 +18,63 @@
 {
     <script type="text/javascript">
         $('#LookupAlbum').on('click', function () {
+
+            $('body').addClass("loading");
+
             var artist = $('#Artist').val();
             var name = $('#Name').val();
 
             $.get('@Url.Action("GetLastfmAlbumInfo")', { artist: artist, name: name }, function (result) {
-
-                console.log(result);
 
                 $('#Artist').val(result.Artist);
                 $('#Name').val(result.Name);
                 $('#Year').val(result.Year);
                 $('#Description').val(result.Description);
 
+                var createTrack = function (i) {
+                    var numberDisplay = $('<input>').addClass("form-control")
+                        .attr("id", "Tracklist_" + i + "__Number")
+                        .attr("Name", "Tracklist[" + i + "].Number")
+                        .val(result.Tracklist[i].Number);
+
+                    var nameInput = $('<input>').addClass("form-control")
+                        .attr("data-val", "true")
+                        .attr("data-val-required", "The Name field is required.")
+                        .attr("id", "Tracklist_" + i + "__Name")
+                        .attr("type", "text")
+                        .attr("Name", "Tracklist[" + i + "].Name")
+                        .val(result.Tracklist[i].Name);
+
+                    var durationInput = $('<input>').addClass("form-control")
+                        .attr("data-val", "true")
+                        .attr("id", "Tracklist_" + i + "__Duration")
+                        .attr("Name", "Tracklist[" + i + "].Duration")
+                        .attr("type", "text")
+                        .val(result.Tracklist[i].Duration);
+
+                    numberDisplay = $('<td>').append(numberDisplay);
+                    nameInput = $('<td>').append(nameInput);
+                    durationInput = $('<td>').append(durationInput);
+
+                    var track = $('<tr>').append(numberDisplay);
+                    track.append(nameInput);
+                    track.append(durationInput);
+
+                    $('#TracklistTable').append(track);
+                }
+
                 $.each(result.Tracklist, function (i) {
-                    $('#Tracklist_' + i + '__Number').val(result.Tracklist[i].Number);
-                    $('#Tracklist_' + i + '__Name').val(result.Tracklist[i].Name);
-                    $('#Tracklist_' + i + '__Duration').val(result.Tracklist[i].Duration);
+                    createTrack(i);
                 });
 
                 $('#Image').val(result.Image);
                 $('#LastfmImage').attr('src', result.Image);
 
                 $('#LookupAlbum').hide();
-                $('#LastfmInfo').show();
+                $('#LastfmInfo').fadeIn();
+                $('#AddNewAlbum').fadeIn();
+            }).done(function () {
+                $('body').removeClass("loading");;
             });
         });
     </script>

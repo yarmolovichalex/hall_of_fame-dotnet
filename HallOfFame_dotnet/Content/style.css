@@ -14,14 +14,6 @@ body {
     min-height: 100%;
 }
     
-h2 {
-	font-family: 'Cuprum', sans-serif;
-	font-size: 1.7em;
-}
-p, li {
-	font-family: 'Cuprum', sans-serif;
-    font-size: 1.15em;
-}
 ol {
     list-style: decimal inside none;
 }
@@ -146,5 +138,25 @@ a#home:hover {
     display:none;
 }
 .js-visible {
+    display: block;
+}
+
+.modal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .5) 
+                url('http://i.stack.imgur.com/FhHRx.gif') 
+                50% 50% 
+                no-repeat;
+}
+body.loading {
+    overflow: hidden;   
+}
+body.loading .modal {
     display: block;
 }

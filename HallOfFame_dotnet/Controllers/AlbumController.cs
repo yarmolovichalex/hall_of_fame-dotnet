@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -25,7 +26,7 @@ namespace HallOfFame_dotnet.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            return View(new Album { Tracklist = new Track[16]}); // TODO придумать способ добавлять поля для треков через jquery
+            return View(new Album()); // TODO придумать способ добавлять поля для треков через jquery
         }
 
         [HttpPost, ValidateInput(false)] // TODO пока не валидировать
@@ -73,6 +74,27 @@ namespace HallOfFame_dotnet.Controllers
             }
 
             return Json(ParseResponse(doc), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult DisplayTracklist(List<Track> tracklist)
+        {
+            var json = Json(new { error = true, message = RenderRazorViewToString("_Tracklist", tracklist) });
+            return Json(new { error=true, message = RenderRazorViewToString("_Tracklist", tracklist)});
+        }
+
+        public string RenderRazorViewToString(string viewName, object model)
+        {
+            ViewData.Model = model;
+            using (var sw = new StringWriter())
+            {
+                var viewResult = ViewEngines.Engines.FindPartialView(ControllerContext,
+                                                                         viewName);
+                var viewContext = new ViewContext(ControllerContext, viewResult.View,
+                                             ViewData, TempData, sw);
+                viewResult.View.Render(viewContext, sw);
+                viewResult.ViewEngine.ReleaseView(ControllerContext, viewResult.View);
+                return sw.GetStringBuilder().ToString();
+            }
         }
 
         private Album ParseResponse(XDocument doc)

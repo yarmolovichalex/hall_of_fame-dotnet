@@ -25,7 +25,9 @@ namespace HallOfFame_dotnet.Models
     public class Track
     {
         public int ID { get; set; }
+        [Required]
         public int Number { get; set; }
+        [Required]
         public string Name { get; set; }
         public int Duration { get; set; }
         public int AlbumID { get; set; }

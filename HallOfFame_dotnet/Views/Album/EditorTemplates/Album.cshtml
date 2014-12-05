@@ -21,24 +21,21 @@
         @Html.TextAreaFor(a => a.Description, 15, 55, new { @class = "form-control" })
     </div>
 
-    <div class="form-group">
+    <div class="form-group" id="Tracklist">
         @Html.LabelFor(a => a.Tracklist)
-        <div id="Tracklist">
-            <table>
-                <tr>
-                    <th>
-                        <label>Number</label>
-                    </th>
-                    <th>
-                        <label>Name</label>
-                    </th>
-                    <th>
-                        <label>Duration</label>
-                    </th>
-                </tr>
-                @Html.EditorFor(a => a.Tracklist)
-            </table>
-        </div>
+        <table id="TracklistTable">
+            <tr>
+                <th>
+                    <label>Number</label>
+                </th>
+                <th>
+                    <label>Name</label>
+                </th>
+                <th>
+                    <label>Duration</label>
+                </th>
+            </tr>
+        </table>
     </div>
 
     <div class="form-group">
