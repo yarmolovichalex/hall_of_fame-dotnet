@@ -95,12 +95,12 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\cubes.png" />
+    <Content Include="Content\debut_light.png" />
     <Content Include="Content\fancybox_overlay.png" />
     <Content Include="Content\fancybox_sprite.png" />
     <Content Include="Content\gray_jean.png" />
-    <Content Include="Content\grid.png" />
     <Content Include="Content\jquery.fancybox.css" />
-    <Content Include="Content\nasty_fabric.png" />
     <Content Include="Content\reset.css" />
     <Content Include="Content\style.css" />
     <Content Include="Global.asax" />

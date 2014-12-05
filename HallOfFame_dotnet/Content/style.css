@@ -1,58 +1,60 @@
 html {
     height: 100%;
 }
+
 body {
     background-color: #F5F8FA;
-    background: url("/Content/gray_jean.png");
+    background: url("/Content/cubes.png");
     text-align: center;
     height: 100%;
 }
+
 .page-wrap {
     width: 1240px;
-    background: url("/Content/grid.png");
+    background: url("/Content/debut_light.png");
     margin: 0px auto;
     min-height: 100%;
 }
-    
+
 ol {
     list-style: decimal inside none;
 }
-    
+
 img {
     max-width: 600px;
     max-height: 600px;
 }
-img.small {
-	height: 250px;
-	width: 250px;
 
-    margin-bottom: 10px;
-
-    -webkit-box-shadow: 0px 0px 15px 1px rgba(163,163,163,1);
-    -moz-box-shadow: 0px 0px 15px 1px rgba(163,163,163,1);
-    box-shadow: 0px 0px 15px 1px rgba(163,163,163,1);
-}
+    img.small {
+        height: 250px;
+        width: 250px;
+        margin-bottom: 10px;
+        -webkit-box-shadow: 0px 0px 15px 1px rgba(163,163,163,1);
+        -moz-box-shadow: 0px 0px 15px 1px rgba(163,163,163,1);
+        box-shadow: 0px 0px 15px 1px rgba(163,163,163,1);
+    }
 
 .album {
-    background: url("/Content/gray_jean.png");
-	display: none;
-	text-align: left;
-	padding: 10px 15px 15px 15px;
-	margin: 10px;
+    background: url("/Content/cubes.png");
+    display: none;
+    text-align: left;
+    padding: 10px 15px 15px 15px;
+    margin: 10px;
     width: 280px;
+    -webkit-box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.15);
+    -moz-box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.15);
+    box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.15);
+}
 
-    -webkit-box-shadow: 0px 0px 15px 1px rgba(204,204,204,1);
-    -moz-box-shadow: 0px 0px 15px 1px rgba(204,204,204,1);
-    box-shadow: 0px 0px 15px 1px rgba(204,204,204,1);
-}
-.album:hover {
-    -webkit-box-shadow: 0px 0px 15px 4px rgba(163,163,163,1);
-    -moz-box-shadow: 0px 0px 15px 4px rgba(163,163,163,1);
-    box-shadow: 0px 0px 15px 4px rgba(163,163,163,1);
-}
-.album .form-group {
-    margin-bottom: 10px;
-}
+    .album:hover {
+        -webkit-box-shadow: 0px 0px 15px 2px rgba(0,0,0,0.25);
+        -moz-box-shadow: 0px 0px 15px 2px rgba(0,0,0,0.25);
+        box-shadow: 0px 0px 15px 2px rgba(0,0,0,0.25);
+    }
+
+    .album .form-group {
+        margin-bottom: 10px;
+    }
 
 input {
     display: block;
@@ -60,20 +62,23 @@ input {
 
 .album-page {
     max-width: 984px;
-	margin: auto;
+    margin: auto;
     text-align: center;
 }
+
 .album-page-center {
     display: inline-block;
 }
+
 .album-image-big {
     padding: 10px;
     margin: 10px;
     display: inline;
     float: left;
     border: 1px solid #BFBFBF;
-	border-radius: 5px;
+    border-radius: 5px;
 }
+
 .info {
     width: 300px;
     text-align: left;
@@ -82,16 +87,17 @@ input {
     margin: 10px;
     padding: 10px;
     border: 1px solid #BFBFBF;
-	border-radius: 5px;
+    border-radius: 5px;
     background: url("/Content/gray_jean.png");
 }
 
 a#home {
     font-family: 'Lobster', sans-serif;
-	font-size: 2em;
+    font-size: 2em;
     text-decoration: none;
-    color: #1F1F1F;
+    color: #333;
 }
+
 a#home:hover {
     text-decoration: none;
     color: #B73045;
@@ -108,7 +114,7 @@ a#home:hover {
     background: transparent;
     border: 0;
     border-radius: 0;
-    background: url("/Content/nasty_fabric.png");
+    background: url("/Content/debut_light.png");
 }
 
 .album form {
@@ -123,40 +129,50 @@ a#home:hover {
     opacity: 0.3;
     float: left;
 }
+
 .menu .right {
     opacity: 0.3;
     float: right;
 }
+
 .menu .left:hover {
     opacity: 1;
 }
+
 .menu .right:hover {
     opacity: 1;
 }
 
 .js-hidden {
-    display:none;
+    display: none;
 }
+
 .js-visible {
     display: block;
 }
 
 .modal {
-    display:    none;
-    position:   fixed;
-    z-index:    1000;
-    top:        0;
-    left:       0;
-    height:     100%;
-    width:      100%;
-    background: rgba( 255, 255, 255, .5) 
-                url('http://i.stack.imgur.com/FhHRx.gif') 
-                50% 50% 
-                no-repeat;
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba( 255, 255, 255, .5) url('http://i.stack.imgur.com/FhHRx.gif') 50% 50% no-repeat;
 }
+
 body.loading {
-    overflow: hidden;   
+    overflow: hidden;
 }
-body.loading .modal {
-    display: block;
+
+    body.loading .modal {
+        display: block;
+    }
+
+#navbar {
+    -webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.15);
+    -moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.15);
+    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.15);
+    border-bottom: #B73045 solid 2px;
 }
