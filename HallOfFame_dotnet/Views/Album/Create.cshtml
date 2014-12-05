@@ -4,14 +4,16 @@
 }
 
 <div class="container">
-    @using (Html.BeginForm("Create", "Album", FormMethod.Post))
-    {
-        @Html.EditorForModel()
-        <div class="js-visible">
-            <button type="button" id="LookupAlbum">Lookup</button>
-        </div>
-        <button type="submit" value="Add new album" id="AddNewAlbum" class="btn btn-info js-hidden">Add album</button>
-    }
+    <div class="row">
+        @using (Html.BeginForm("Create", "Album", FormMethod.Post, new { @class = "form-horizontal", id = "CreateAlbumForm" }))
+        {
+            @Html.EditorForModel()
+            <div class="js-visible">
+                <button type="button" class="btn btn-info js-visible col-xs-2 col-xs-offset-5 text-center" id="LookupAlbum">Lookup</button>
+            </div>
+            <button type="submit" value="Add new album" id="AddNewAlbum" class="btn btn-info js-hidden col-xs-2 col-xs-offset-5 text-center">Add album</button>
+        }
+    </div>
 </div>
 
 @section Scripts
@@ -52,9 +54,9 @@
                         .attr("type", "text")
                         .val(result.Tracklist[i].Duration);
 
-                    numberDisplay = $('<td>').append(numberDisplay);
-                    nameInput = $('<td>').append(nameInput);
-                    durationInput = $('<td>').append(durationInput);
+                    numberDisplay = $('<td>').append(numberDisplay).addClass("col-lg-1");
+                    nameInput = $('<td>').append(nameInput).addClass("col-lg-10");
+                    durationInput = $('<td>').append(durationInput).addClass("col-lg-1");
 
                     var track = $('<tr>').append(numberDisplay);
                     track.append(nameInput);
@@ -70,12 +72,28 @@
                 $('#Image').val(result.Image);
                 $('#LastfmImage').attr('src', result.Image);
 
+                $('#LookupAlbum').removeClass("js-visible").addClass("js-hidden");
                 $('#LookupAlbum').hide();
                 $('#LastfmInfo').fadeIn();
                 $('#AddNewAlbum').fadeIn();
+                $('#AddNewAlbum').removeClass("js-hidden").addClass("js-visible");
             }).done(function () {
                 $('body').removeClass("loading");;
             });
+        });
+
+        $("#CreateAlbumForm").keypress(function (event) {
+            if (event.which == 13) {
+                event.preventDefault();
+
+                console.log($('#AddNewAlbum').hasClass("js-hidden"));
+
+                if ($('#LookupAlbum').hasClass("js-visible")) {
+                    $('#LookupAlbum').click();
+                } else {
+                    $('#AddNewAlbum').click();
+                }
+            }
         });
     </script>
 }

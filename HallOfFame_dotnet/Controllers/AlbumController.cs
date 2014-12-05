@@ -26,7 +26,7 @@ namespace HallOfFame_dotnet.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            return View(new Album()); // TODO придумать способ добавлять поля для треков через jquery
+            return View(new Album());
         }
 
         [HttpPost, ValidateInput(false)] // TODO пока не валидировать
