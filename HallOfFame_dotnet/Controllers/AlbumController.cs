@@ -70,31 +70,10 @@ namespace HallOfFame_dotnet.Controllers
             string status = doc.Root.Attribute("status").Value;
             if (status == "failed")
             {
-                //return new ContentResult { Content = doc.Root.Element("error").Value }; // TODO переделать
+                return Json("{\"error\" : doc.Root.Element(\"error\").Value}"); // TODO переделать
             }
 
             return Json(ParseResponse(doc), JsonRequestBehavior.AllowGet);
-        }
-
-        public ActionResult DisplayTracklist(List<Track> tracklist)
-        {
-            var json = Json(new { error = true, message = RenderRazorViewToString("_Tracklist", tracklist) });
-            return Json(new { error=true, message = RenderRazorViewToString("_Tracklist", tracklist)});
-        }
-
-        public string RenderRazorViewToString(string viewName, object model)
-        {
-            ViewData.Model = model;
-            using (var sw = new StringWriter())
-            {
-                var viewResult = ViewEngines.Engines.FindPartialView(ControllerContext,
-                                                                         viewName);
-                var viewContext = new ViewContext(ControllerContext, viewResult.View,
-                                             ViewData, TempData, sw);
-                viewResult.View.Render(viewContext, sw);
-                viewResult.ViewEngine.ReleaseView(ControllerContext, viewResult.View);
-                return sw.GetStringBuilder().ToString();
-            }
         }
 
         private Album ParseResponse(XDocument doc)
