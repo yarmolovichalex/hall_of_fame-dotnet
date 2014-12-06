@@ -9,7 +9,13 @@ namespace HallOfFame_dotnet
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.AppendTrailingSlash = true;
-            
+
+            routes.MapRoute(
+                name: "Home",
+                url: "",
+                defaults: new {controller = "Home", action = "Index"}
+                );
+
             routes.MapRoute(
                 name: "Albums",
                 url: "Album",
@@ -25,6 +31,8 @@ namespace HallOfFame_dotnet
                url: "{controller}/{action}",
                defaults: new { controller = "Home", action = "Index" }
                );
+
+            
         }
     }
 }
