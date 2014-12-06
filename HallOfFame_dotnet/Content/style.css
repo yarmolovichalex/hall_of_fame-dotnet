@@ -6,13 +6,12 @@ body {
     background-color: #F5F8FA;
     background: url("/Content/cubes.png");
     text-align: center;
+    margin: 0px auto;
     height: 100%;
 }
 
 .page-wrap {
-    width: 1240px;
     background: url("/Content/debut_light.png");
-    margin: 0px auto;
     min-height: 100%;
 }
 
