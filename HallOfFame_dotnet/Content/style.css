@@ -20,8 +20,8 @@ ol {
 }
 
 img {
-    max-width: 600px;
-    max-height: 600px;
+    max-width: 500px;
+    max-height: 500px;
 }
 
     img.small {
@@ -37,9 +37,9 @@ img {
     background: url("/Content/cubes.png");
     display: none;
     text-align: left;
-    padding: 10px 15px 15px 15px;
-    margin: 10px;
-    width: 280px;
+    padding: 10px;
+    margin: 15px 5px 5px 5px;
+    width: 270px;
     -webkit-box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.15);
     -moz-box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.15);
     box-shadow: 0px 0px 15px 1px rgba(0,0,0,0.15);
@@ -97,10 +97,10 @@ a#home {
     color: #333;
 }
 
-a#home:hover {
-    text-decoration: none;
-    color: #B73045;
-}
+    a#home:hover {
+        text-decoration: none;
+        color: #B73045;
+    }
 
 #newAlbum {
     max-width: 600px;
@@ -109,20 +109,22 @@ a#home:hover {
 }
 
 .navbar {
-    margin-bottom: 10px;
+    margin-bottom: 0;
     background: transparent;
     border: 0;
     border-radius: 0;
     background: url("/Content/debut_light.png");
+    -webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.15);
+    -moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.15);
+    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.15);
+    border-bottom: #B73045 solid 2px;
 }
 
 .album form {
     display: inline;
 }
 
-.nav .navbar-nav {
-    background: transparent;
-}
+
 
 .menu .left {
     opacity: 0.3;
@@ -168,10 +170,3 @@ body.loading {
     body.loading .modal {
         display: block;
     }
-
-#navbar {
-    -webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.15);
-    -moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.15);
-    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.15);
-    border-bottom: #B73045 solid 2px;
-}
