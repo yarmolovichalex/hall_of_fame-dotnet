@@ -70,7 +70,7 @@ namespace HallOfFame_dotnet.Controllers
             if (status == "failed")
             {
                 Response.StatusCode = 400;
-                return Json(new {error = doc.Root.Element("error").Value}, JsonRequestBehavior.AllowGet);
+                return Json(doc.Root.Element("error").Value, JsonRequestBehavior.AllowGet);
             }
 
             return Json(ParseResponse(doc), JsonRequestBehavior.AllowGet);
