@@ -3,6 +3,15 @@ var main = function() {
 
     $(".album").fadeIn().css("display", "inline-block");
 
+    $(".menu").css('opacity', 0.3);
+    $(".album").hover(
+        function() {
+            $(this).find('.menu').stop().fadeTo('fast', 1);
+        },
+        function() {
+            $(this).find('.menu').stop().fadeTo('fast', 0.3);
+        });
+
 	setFancyBox();
 };
 

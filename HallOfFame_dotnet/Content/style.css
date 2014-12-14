@@ -4,14 +4,13 @@ html {
 
 body {
     background-color: #F5F8FA;
-    background: url("/Content/cubes.png");
+    background: url("/Content/debut_light.png");
     text-align: center;
     margin: 0px auto;
     height: 100%;
 }
 
 .container {
-    background: url("/Content/debut_light.png");
     min-height: 100%;
 }
 
@@ -123,19 +122,10 @@ a#home {
 }
 
 .menu .left {
-    opacity: 0.3;
     float: left;
 }
 .menu .right {
-    opacity: 0.3;
     float: right;
-}
-
-.menu .left:hover {
-    opacity: 1;
-}
-.menu .right:hover {
-    opacity: 1;
 }
 
 .js-hidden {
