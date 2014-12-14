@@ -86,8 +86,10 @@
 
             $.ajax({url: '@Url.Action("GetLastfmAlbumInfo")', data: { artist: artist, name: name }})
                 .done(function (result) {
+                    console.log(result);
                     processResult(result);
                 }).fail(function (result) {
+                    console.log(result);
                     displayErrorMessage(result.responseJSON);
                 });
         });
@@ -95,9 +97,6 @@
         $("#CreateAlbumForm").keypress(function (event) {
             if (event.which == 13) {
                 event.preventDefault();
-
-                console.log($('#AddNewAlbum').hasClass("js-hidden"));
-
                 if ($('#LookupAlbum').hasClass("js-visible")) {
                     $('#LookupAlbum').click();
                 } else {
