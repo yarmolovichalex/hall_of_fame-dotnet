@@ -12,7 +12,20 @@ var main = function() {
             $(this).find('.menu').stop().fadeTo('fast', 0.3);
         });
 
-	setFancyBox();
+    //$('#btnRemoveAlbum').click(function () {
+    //    var album = this.closest('.album');
+    //    var id = album.attr('data-id');
+    //    $.ajax({
+    //        type: 'POST',
+    //        url: '/Album/Remove',
+    //        data: { id: id },
+    //        success: function() {
+    //            album.hide();
+    //        }
+    //    });
+    //});
+
+    setFancyBox();
 };
 
 var setFancyBox = function()
@@ -33,6 +46,11 @@ var setFancyBox = function()
 	          }
 	      }
 	});    
+};
+
+var OnSuccessRemoveAlbum = function (data) {
+    var album = $('*[data-id=' + data.id + ']');
+    album.fadeOut();
 };
 
 $(document).ready(main);

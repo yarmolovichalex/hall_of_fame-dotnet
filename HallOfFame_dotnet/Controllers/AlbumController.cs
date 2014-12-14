@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Configuration;
@@ -41,14 +42,14 @@ namespace HallOfFame_dotnet.Controllers
             return View("Create");
         }
 
-        public ActionResult Remove(string artist, string albumName)
+        public JsonResult Remove(int id)
         {
-            var album = context.Albums.FirstOrDefault(a => (a.Artist == artist && a.Name == albumName));
+            var album = context.Albums.FirstOrDefault(a => a.ID == id);
 
             context.Albums.Remove(album);
             context.SaveChanges();
 
-            return RedirectToAction("Index", "Home");
+            return Json(new {id});
         }
 
         public async Task<JsonResult> GetLastfmAlbumInfo(string artist, string name)
