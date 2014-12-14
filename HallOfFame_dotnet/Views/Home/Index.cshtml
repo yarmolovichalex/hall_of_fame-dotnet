@@ -1,7 +1,7 @@
-﻿@model List<HallOfFame_dotnet.Models.Album>
+﻿@model HallOfFame_dotnet.Models.IndexViewModel
+@using HallOfFame_dotnet.Helpers
 
-
-@foreach (var album in Model)
+@foreach (var album in Model.Albums)
 {
     <div class="album" data-id="@album.ID">
         <div class="form-group">
@@ -23,21 +23,32 @@
             {
                 <button type="submit" value="moreInformation" class="btn btn-info left"><span class="glyphicon glyphicon-th-list"></span></button>
             }
-           
+
             @using (Ajax.BeginForm("Remove", "Album", new AjaxOptions
-                                         {
-                                             Url = Url.Action("Remove", "Album"),
-                                             OnSuccess = "OnSuccessRemoveAlbum",
-                                             HttpMethod = "POST"
-                                         }))
+            {
+                Url = Url.Action("Remove", "Album"),
+                OnSuccess = "OnSuccessRemoveAlbum",
+                HttpMethod = "POST"
+            }))
             {
                 <input type="hidden" name="id" value="@album.ID" />
                 <button type="submit" id="btnRemoveAlbum" class="btn btn-danger right"><span class="glyphicon glyphicon-remove"></span></button>
             }
-            
+
         </div>
     </div>
 }
+
+<nav>
+    <ul class="pagination">
+        @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", new { page = x }))
+    </ul>    
+</nav>
+
+
+@*<div class="btn-group">
+    @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", new { page = x }))
+</div>*@
 
 @section Scripts
 {

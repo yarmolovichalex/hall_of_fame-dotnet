@@ -1,6 +1,8 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using HallOfFame_dotnet.Infrastructure;
+using HallOfFame_dotnet.Models;
 
 namespace HallOfFame_dotnet.Controllers
 {
@@ -8,11 +10,21 @@ namespace HallOfFame_dotnet.Controllers
     {
         private readonly AlbumContext context = new AlbumContext();
 
-        public ActionResult Index()
+        public ActionResult Index(int page = 1)
         {
             var albums = context.Albums.ToList();
 
-            return View(albums);
+            int pageSize = 8;
+            IEnumerable<Album> albumsPerPage = albums.Skip((page - 1) * pageSize).Take(pageSize);
+            PageInfo pageInfo = new PageInfo { PageNumber = page, PageSize = pageSize, TotalItems = albums.Count };
+
+            IndexViewModel model = new IndexViewModel
+            {
+                Albums = albumsPerPage,
+                PageInfo = pageInfo
+            };
+
+            return View(model);
         }
 	}
 }
