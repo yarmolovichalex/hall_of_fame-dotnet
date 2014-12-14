@@ -12,8 +12,8 @@ namespace HallOfFame_dotnet
 
             routes.MapRoute(
                 name: "Home",
-                url: "",
-                defaults: new {controller = "Home", action = "Index"}
+                url: "{page}",
+                defaults: new { controller = "Home", action = "Index", page = 1 }
                 );
 
             routes.MapRoute(
@@ -31,8 +31,6 @@ namespace HallOfFame_dotnet
                url: "{controller}/{action}",
                defaults: new { controller = "Home", action = "Index" }
                );
-
-            
         }
     }
 }
