@@ -69,7 +69,8 @@ namespace HallOfFame_dotnet.Controllers
             string status = doc.Root.Attribute("status").Value;
             if (status == "failed")
             {
-                return Json("{\"error\" : doc.Root.Element(\"error\").Value}"); // TODO переделать
+                Response.StatusCode = 400;
+                return Json(new {error = doc.Root.Element("error").Value}, JsonRequestBehavior.AllowGet);
             }
 
             return Json(ParseResponse(doc), JsonRequestBehavior.AllowGet);

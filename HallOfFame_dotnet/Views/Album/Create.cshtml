@@ -3,11 +3,11 @@
     ViewBag.Title = "Add album";
 }
 
-@using (Html.BeginForm("Create", "Album", FormMethod.Post, new { @class="form-horizontal", id = "CreateAlbumForm" }))
+@using (Html.BeginForm("Create", "Album", FormMethod.Post, new { @class = "form-horizontal", id = "CreateAlbumForm" }))
 {
     @Html.EditorForModel()
     <div class="form-group">
-        <div class="col-sm-offset-4 col-sm-2">
+        <div class="col-sm-offset-4 col-sm-2" id="LookupDiv">
             <button type="button" class="btn btn-info js-visible" id="LookupAlbum">Lookup</button>
         </div>
     </div>
@@ -18,13 +18,21 @@
 {
     <script type="text/javascript">
         $('#LookupAlbum').on('click', function () {
-
             $('body').addClass("loading");
 
             var artist = $('#Artist').val();
             var name = $('#Name').val();
 
-            $.get('@Url.Action("GetLastfmAlbumInfo")', { artist: artist, name: name }, function (result) {
+            var displayErrorMessage = function (message) {
+                $('body').removeClass("loading");
+                var errorDiv = $('<div>').addClass('col-sm-2');
+                var errorMessage = $('<p>').text(message);
+                errorDiv.append(errorMessage);
+                $('#LookupDiv').after(errorDiv);
+                errorDiv.fadeOut(5000);
+            };
+            var processResult = function (result) {
+                $('body').removeClass("loading");
 
                 $('#Artist').val(result.Artist);
                 $('#Name').val(result.Name);
@@ -61,8 +69,7 @@
                     track.append(durationInput);
 
                     $('#TracklistTable').append(track);
-                }
-
+                };
                 $.each(result.Tracklist, function (i) {
                     createTrack(i);
                 });
@@ -75,9 +82,14 @@
                 $('#LastfmInfo').fadeIn();
                 $('#AddNewAlbum').fadeIn();
                 $('#AddNewAlbum').removeClass("js-hidden").addClass("js-visible");
-            }).done(function () {
-                $('body').removeClass("loading");;
-            });
+            };
+
+            $.ajax({url: '@Url.Action("GetLastfmAlbumInfo")', data: { artist: artist, name: name }})
+                .done(function (result) {
+                    processResult(result);
+                }).fail(function (result) {
+                    displayErrorMessage(result.responseJSON.error);
+                });
         });
 
         $("#CreateAlbumForm").keypress(function (event) {
