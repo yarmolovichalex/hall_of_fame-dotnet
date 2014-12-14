@@ -3,18 +3,16 @@
     ViewBag.Title = "Add album";
 }
 
-<div class="container">
-    <div class="row">
-        @using (Html.BeginForm("Create", "Album", FormMethod.Post, new { @class = "form-horizontal", id = "CreateAlbumForm" }))
-        {
-            @Html.EditorForModel()
-            <div class="js-visible">
-                <button type="button" class="btn btn-info js-visible col-xs-2 col-xs-offset-5 text-center" id="LookupAlbum">Lookup</button>
-            </div>
-            <button type="submit" value="Add new album" id="AddNewAlbum" class="btn btn-info js-hidden col-xs-2 col-xs-offset-5 text-center">Add album</button>
-        }
+@using (Html.BeginForm("Create", "Album", FormMethod.Post, new { @class="form-horizontal", id = "CreateAlbumForm" }))
+{
+    @Html.EditorForModel()
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-2">
+            <button type="button" class="btn btn-info js-visible" id="LookupAlbum">Lookup</button>
+        </div>
     </div>
-</div>
+    <button type="submit" value="Add new album" id="AddNewAlbum" class="btn btn-info js-hidden col-sm-2">Add album</button>
+}
 
 @section Scripts
 {

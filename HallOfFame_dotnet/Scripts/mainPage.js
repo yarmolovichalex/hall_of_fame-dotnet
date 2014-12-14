@@ -12,19 +12,6 @@ var main = function() {
             $(this).find('.menu').stop().fadeTo('fast', 0.3);
         });
 
-    //$('#btnRemoveAlbum').click(function () {
-    //    var album = this.closest('.album');
-    //    var id = album.attr('data-id');
-    //    $.ajax({
-    //        type: 'POST',
-    //        url: '/Album/Remove',
-    //        data: { id: id },
-    //        success: function() {
-    //            album.hide();
-    //        }
-    //    });
-    //});
-
     setFancyBox();
 };
 
