@@ -79,7 +79,9 @@
 
                 $('#LookupAlbum').removeClass("js-visible").addClass("js-hidden");
                 $('#LookupAlbum').hide();
-                $('#LastfmInfo').fadeIn();
+
+                $(".js-hidden").removeClass("js-hidden").addClass("js-visible");
+
                 $('#AddNewAlbum').fadeIn();
                 $('#AddNewAlbum').removeClass("js-hidden").addClass("js-visible");
             };
